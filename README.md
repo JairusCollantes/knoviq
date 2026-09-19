@@ -1,19 +1,42 @@
-# React + Vite
+# Knoviq
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> An AI-powered interactive learning and review platform.
 
-Currently, two official plugins are available:
+**Knoviq** is a React project I'm building to learn modern web development while creating something actually useful for studying.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Status
 
-## React Compiler
+**Early development**
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Currently figuring out:
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+- React
+- Vite
+- React Router
+- APIs & backend development
+- AI-generated lessons
+- Interactive quizzes and exercises
+- User progress & persistence
 
-## Expanding the ESLint configuration
+### The Idea
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Enter a topic → generate a lesson → learn → practice → see your progress.
+
+The goal is to make studying feel a little more interactive and less like staring at a wall of notes.
+
+### Stack
+
+- React
+- Vite
+- JavaScript
+- MongoDB
+- Node.js
+- Qwen API
+- Vercel
+- GitHub
+
+### Note
+
+This project is primarily being built as a learning project and portfolio piece.
+
+More coming soon.
