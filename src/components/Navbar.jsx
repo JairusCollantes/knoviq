@@ -1,12 +1,13 @@
 import { NavLink } from 'react-router-dom';
+import { BrainCog, LayoutDashboard, LibraryBig, User } from 'lucide-react'
 import './Navbar.css';
 
 export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <span className="brand-icon">🧠</span>
-        <span className="brand-text">StudyFlow</span>
+        <BrainCog />
+        <span className="brand-text">Knoviq</span>
       </div>
 
       <div className="navbar-links">
@@ -14,21 +15,21 @@ export default function Navbar() {
           to="/dashboard"
           className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
         >
-          <span className="nav-icon">📊</span>
+          <LayoutDashboard />
           Dashboard
         </NavLink>
         <NavLink
           to="/practice"
           className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
         >
-          <span className="nav-icon">📚</span>
+          <LibraryBig />
           Library
         </NavLink>
         <NavLink
           to="/profile"
           className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
         >
-          <span className="nav-icon">👤</span>
+          <User />
           Profile
         </NavLink>
       </div>

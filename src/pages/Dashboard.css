@@ -1,0 +1,238 @@
+.dashboard {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.dash-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.25rem;
+}
+
+.dash-subtitle {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.dash-section {
+  margin-top: 2.5rem;
+}
+
+.section-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #555;
+  margin: 0 0 1rem;
+}
+
+/* Continue Card */
+.continue-card {
+  display: block;
+  background: #16161e;
+  border: 1px solid #1e1e2a;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.15s;
+}
+
+.continue-card:hover {
+  border-color: #333;
+  transform: translateY(-1px);
+}
+
+.continue-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.topic-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  line-height: 1;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+}
+
+.topic-badge svg {
+  flex-shrink: 0;
+}
+
+.continue-pct {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.continue-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #eee;
+  margin: 0 0 1rem;
+}
+
+.progress-bar-track {
+  height: 6px;
+  background: #1e1e2a;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.continue-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.continue-btn {
+  color: #7c6aef;
+  font-weight: 600;
+}
+
+/* Topics */
+.topics-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.topic-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #2a2a3a;
+  background: #16161e;
+  color: #ccc;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.topic-chip:hover {
+  background: #1e1e2a;
+  color: #fff;
+}
+
+.topic-chip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.topic-chip-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.add-topic {
+  border-style: dashed;
+  color: #555;
+  font-family: inherit;
+}
+
+.add-topic:hover {
+  color: #888;
+  border-color: #444;
+}
+
+/* Activity */
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid #1a1a24;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-dot-wrap {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activity-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #7c6aef;
+}
+
+.activity-dot.complete {
+  background: #4ade80;
+}
+
+.activity-dot.practice {
+  background: #60a5fa;
+}
+
+.activity-dot.start {
+  background: #fbbf24;
+}
+
+.activity-dot.review {
+  background: #a78bfa;
+}
+
+.activity-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.activity-text {
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.activity-score {
+  background: #1e1e2a;
+  color: #aaa;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+}
+
+.activity-time {
+  color: #555;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
