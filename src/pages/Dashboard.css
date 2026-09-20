@@ -22,6 +22,7 @@ body,
   flex-direction: column;
   padding: 2rem;
   overflow: hidden;
+  animation: fadeUp 0.35s ease;
 }
 
 .dash-grid {
@@ -109,6 +110,7 @@ body,
   padding: 1.25rem 1.5rem;
   text-decoration: none;
   transition: border-color 0.2s, transform 0.15s;
+  animation: fadeUp 0.35s ease;
 }
 
 .continue-card:hover {
@@ -121,6 +123,7 @@ body,
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.75rem;
+  animation: fadeUp 0.35s ease;
 }
 
 .topic-badge {
@@ -132,6 +135,7 @@ body,
   font-weight: 600;
   padding: 0.25rem 0.65rem;
   border-radius: 6px;
+  animation: fadeUp 0.35s ease;
 }
 
 .topic-badge svg {
@@ -185,6 +189,7 @@ body,
   flex-direction: column;
   gap: 0;
   padding-right: 4px;
+  animation: fadeUp 0.35s ease;
 }
 
 .activity-item {
@@ -251,6 +256,7 @@ body,
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  animation: fadeUp 0.35s ease;
 }
 
 .topic-chip {
@@ -329,4 +335,32 @@ body,
   .dash-section-fill {
     flex: none;
   }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes optionIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes popIn {
+  0%   { opacity: 0; transform: scale(0.5); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-4px); }
+  40%      { transform: translateX(4px); }
+  60%      { transform: translateX(-2px); }
+  80%      { transform: translateX(2px); }
 }

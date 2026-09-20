@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CodeXml, SquareFunction } from 'lucide-react';
+import { CodeXml, SquareFunction, Search, Plus } from 'lucide-react';
 import './Library.css';
 
 const topics = [
@@ -8,7 +8,6 @@ const topics = [
   { id: 'cpp', name: 'C++', color: '#00599C', icon: <CodeXml /> },
   { id: 'calculus', name: 'Calculus', color: '#e74c3c', icon: <SquareFunction /> },
 ];
-
 
 const lessons = [
   { id: 'java-oop', topicId: 'java', title: 'OOP Basics', difficulty: 'beginner', progress: 8, total: 10 },
@@ -18,7 +17,6 @@ const lessons = [
   { id: 'cpp-linked-lists', topicId: 'cpp', title: 'Linked Lists', difficulty: 'intermediate', progress: 9, total: 10 },
   { id: 'calc-limits', topicId: 'calculus', title: 'Limits & Continuity', difficulty: 'beginner', progress: 5, total: 10 },
 ];
-
 
 export default function Library() {
   const [search, setSearch] = useState('');
@@ -40,7 +38,7 @@ export default function Library() {
       </header>
 
       <div className="search-wrap">
-        <span className="search-icon">🔍</span>
+        <Search size={16} className="search-icon" />
         <input
           type="text"
           placeholder="Search lessons..."
@@ -48,29 +46,57 @@ export default function Library() {
           onChange={(e) => setSearch(e.target.value)}
           className="search-input"
         />
+        {search && (
+          <button
+            type="button"
+            className="search-clear"
+            onClick={() => setSearch('')}
+            aria-label="Clear search"
+          >
+            ×
+          </button>
+        )}
       </div>
 
       <div className="lib-topics">
         {filteredTopics.map((t) => (
-          <div key={t.id} className="lib-topic-group">
+          <div
+            key={t.id}
+            className="lib-topic-group"
+            style={{ '--topic-color': t.color }}
+          >
             <div className="lib-topic-header">
-              <span className="lib-topic-icon">{t.icon}</span>
+              <span className="lib-topic-icon" style={{ color: t.color }}>
+                {t.icon}
+              </span>
               <h2 className="lib-topic-name">{t.name}</h2>
-              <span className="lib-topic-count">{t.lessons.length} lessons</span>
+              <span className="lib-topic-count">
+                {t.lessons.length} {t.lessons.length === 1 ? 'lesson' : 'lessons'}
+              </span>
             </div>
+
             <div className="lib-lesson-list">
-              {t.lessons.map((l, i) => {
+              {t.lessons.map((l) => {
                 const pct = Math.round((l.progress / l.total) * 100);
                 return (
                   <Link key={l.id} to={`/learn/${l.id}`} className="lib-lesson-row">
-                    <span className="lib-tree">{i === t.lessons.length - 1 ? '└──' : '├──'}</span>
                     <span className="lib-lesson-title">{l.title}</span>
-                    <span className="lib-difficulty" style={{ color: t.color }}>{l.difficulty}</span>
+                    <span
+                      className="lib-difficulty"
+                      style={{ background: t.color + '22', color: t.color }}
+                    >
+                      {l.difficulty}
+                    </span>
                     <div className="lib-lesson-progress">
                       <div className="lib-mini-bar">
-                        <div className="lib-mini-fill" style={{ width: `${pct}%`, background: t.color }} />
+                        <div
+                          className="lib-mini-fill"
+                          style={{ width: `${pct}%`, background: t.color }}
+                        />
                       </div>
-                      <span className="lib-lesson-score">{l.progress}/{l.total}</span>
+                      <span className="lib-lesson-score">
+                        {l.progress}/{l.total}
+                      </span>
                     </div>
                   </Link>
                 );
@@ -78,9 +104,18 @@ export default function Library() {
             </div>
           </div>
         ))}
+
+        {filteredTopics.length === 0 && (
+          <div className="lib-empty">
+            No lessons match "{search}"
+          </div>
+        )}
       </div>
 
-      <button className="generate-btn">+ Generate Lesson</button>
+      <button className="generate-btn">
+        <Plus size={16} />
+        Generate Lesson
+      </button>
     </div>
   );
 }
