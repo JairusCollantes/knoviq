@@ -1,0 +1,170 @@
+.library {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.lib-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.25rem;
+}
+
+.lib-subtitle {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 0 0 1.5rem;
+}
+
+.search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: #16161e;
+  border: 1px solid #1e1e2a;
+  border-radius: 10px;
+  padding: 0.65rem 1rem;
+  margin-bottom: 2rem;
+  transition: border-color 0.2s;
+}
+
+.search-wrap:focus-within {
+  border-color: #7c6aef55;
+}
+
+.search-icon {
+  font-size: 0.9rem;
+  opacity: 0.5;
+}
+
+.search-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: #eee;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.search-input::placeholder {
+  color: #555;
+}
+
+.lib-topics {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  margin-bottom: 2rem;
+}
+
+.lib-topic-group {
+  background: #16161e;
+  border: 1px solid #1e1e2a;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+}
+
+.lib-topic-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.lib-topic-icon {
+  font-size: 1.15rem;
+}
+
+.lib-topic-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #eee;
+  margin: 0;
+}
+
+.lib-topic-count {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: #555;
+}
+
+.lib-lesson-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.lib-lesson-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0;
+  text-decoration: none;
+  color: #aaa;
+  font-size: 0.9rem;
+  transition: color 0.15s;
+}
+
+.lib-lesson-row:hover {
+  color: #fff;
+}
+
+.lib-tree {
+  color: #333;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.lib-lesson-title {
+  flex: 1;
+}
+
+.lib-lesson-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.lib-mini-bar {
+  width: 48px;
+  height: 4px;
+  background: #1e1e2a;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.lib-mini-fill {
+  height: 100%;
+  border-radius: 2px;
+}
+
+.lib-lesson-score {
+  font-size: 0.75rem;
+  color: #555;
+  font-variant-numeric: tabular-nums;
+  width: 32px;
+  text-align: right;
+}
+
+.generate-btn {
+  width: 100%;
+  padding: 0.85rem;
+  background: #16161e;
+  border: 1.5px dashed #2a2a3a;
+  border-radius: 12px;
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.generate-btn:hover {
+  border-color: #7c6aef55;
+  color: #7c6aef;
+  background: #7c6aef08;
+}

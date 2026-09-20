@@ -2,6 +2,12 @@ import { Link } from 'react-router-dom';
 import { CodeXml, SquareFunction } from 'lucide-react';
 import './Dashboard.css';
 
+const topics = [
+  { id: 'java', name: 'Java', color: '#f89820', icon: <CodeXml /> },
+  { id: 'cpp', name: 'C++', color: '#00599C', icon: <CodeXml /> },
+  { id: 'calculus', name: 'Calculus', color: '#e74c3c', icon: <SquareFunction /> },
+];
+
 export default function Dashboard() {
 
   return (
@@ -35,11 +41,7 @@ export default function Dashboard() {
       <section className="dash-section">
         <h2 className="section-title">Your Topics</h2>
         <div className="topics-row">
-          {[
-  { id: 'java', name: 'Java', color: '#f89820', icon: <CodeXml /> },
-  { id: 'cpp', name: 'C++', color: '#00599C', icon: <CodeXml /> },
-  { id: 'calculus', name: 'Calculus', color: '#e74c3c', icon: <SquareFunction /> },
-].map((t) => (
+          {topics.map((t) => (
             <Link
               key={t.id}
               to="/library"
