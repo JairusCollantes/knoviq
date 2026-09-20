@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Check, X, ChevronDown, ChevronUp, CodeXml, SquareFunction } from 'lucide-react';
 import './Learn.css';
 
-// --- HARDCODED ASSIGNMENTS ---
 const assignments = {
   'java-oop': {
     topic: { name: 'Java ', color: '#f89820', icon: <CodeXml size={14} /> },

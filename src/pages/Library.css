@@ -1,17 +1,13 @@
-/* ============================================================
-   Library shell — fullscreen, list scrolls internally
-   ============================================================ */
 html {
   scrollbar-gutter: stable;
 }
+
 .library {
   width: 100%;
   max-width: 760px;
   margin: 0 auto;
-  /* padding-bottom is larger so the generate button has breathing room */
   padding: 2.5rem 1.5rem 3rem;
   animation: fadeUp 0.35s ease;
-  /* NO height, NO flex: 1, NO overflow: hidden */
 }
 
 .lib-header {
@@ -38,12 +34,8 @@ html {
   flex-direction: column;
   gap: 1.5rem;
   margin-bottom: 2rem;
-  /* NO flex: 1, NO overflow-y: auto, NO min-height: 0, NO padding-right */
 }
 
-/* ============================================================
-   Search
-   ============================================================ */
 .search-wrap {
   flex-shrink: 0;
   display: flex;
@@ -103,9 +95,6 @@ html {
   color: #ccc;
 }
 
-/* ============================================================
-   Scrollable topic list
-   ============================================================ */
 .lib-topics {
   flex: 1;
   min-height: 0;
@@ -117,9 +106,6 @@ html {
   margin-bottom: 1rem;
 }
 
-/* ============================================================
-   Topic group
-   ============================================================ */
 .lib-topic-group {
   position: relative;
   background: linear-gradient(180deg, #16161e 0%, #131319 100%);
@@ -129,7 +115,6 @@ html {
   animation: fadeUp 0.4s ease backwards;
 }
 
-/* Colored left rail (topic accent) */
 .lib-topic-group::before {
   content: '';
   position: absolute;
@@ -147,7 +132,6 @@ html {
   opacity: 1;
 }
 
-/* Stagger */
 .lib-topic-group:nth-child(1) { animation-delay: 0.03s; }
 .lib-topic-group:nth-child(2) { animation-delay: 0.06s; }
 .lib-topic-group:nth-child(3) { animation-delay: 0.09s; }
@@ -191,9 +175,6 @@ html {
   border-radius: 20px;
 }
 
-/* ============================================================
-   Lesson rows
-   ============================================================ */
 .lib-lesson-list {
   display: flex;
   flex-direction: column;
@@ -205,7 +186,7 @@ html {
   align-items: center;
   gap: 0.75rem;
   padding: 0.65rem 0.75rem;
-  margin: 0 -0.75rem;                    /* extend hover bg without shifting */
+  margin: 0 -0.75rem;
   border-radius: 8px;
   text-decoration: none;
   color: #aaa;
@@ -266,9 +247,6 @@ html {
   text-align: right;
 }
 
-/* ============================================================
-   Empty state
-   ============================================================ */
 .lib-empty {
   text-align: center;
   padding: 3rem 1rem;
@@ -278,9 +256,6 @@ html {
   border-radius: 12px;
 }
 
-/* ============================================================
-   Generate button (pinned to bottom)
-   ============================================================ */
 .generate-btn {
   flex-shrink: 0;
   display: flex;
@@ -316,17 +291,6 @@ html {
   transform: rotate(90deg);
 }
 
-/* ============================================================
-   Keyframes (shared with Learn)
-   ============================================================ */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ============================================================
-   Responsive fallback — normal page scroll on small screens
-   ============================================================ */
 @media (max-width: 768px) {
   .library {
     height: auto;
@@ -340,13 +304,11 @@ html {
   }
 }
 
-/* ============================================================
-   Accessibility
-   ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   .lib-topic-group {
     animation: none;
   }
+
   .generate-btn svg,
   .lib-mini-fill,
   .lib-lesson-row,
