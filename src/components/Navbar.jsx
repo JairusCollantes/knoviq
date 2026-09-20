@@ -19,7 +19,7 @@ export default function Navbar() {
           Dashboard
         </NavLink>
         <NavLink
-          to="/practice"
+          to="/library"
           className={({ isActive }) => (isActive ? 'nav-link active' : 'nav-link')}
         >
           <LibraryBig />

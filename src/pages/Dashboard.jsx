@@ -42,7 +42,7 @@ export default function Dashboard() {
 ].map((t) => (
             <Link
               key={t.id}
-              to="/practice"
+              to="/library"
               className="topic-chip"
               style={{ borderColor: t.color + '44' }}
             >
