@@ -4,6 +4,9 @@
   justify-content: space-between;
   padding: 0 2rem;
   height: 64px;
+  flex-shrink: 0;           /* <-- don't let flex steal its height */
+  width: 100%;              /* <-- stretch full width */
+  box-sizing: border-box;   /* <-- padding stays inside the 100% */
   background: #0f0f13;
   border-bottom: 1px solid #1e1e2a;
   position: sticky;

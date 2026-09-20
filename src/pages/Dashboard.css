@@ -1,7 +1,48 @@
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root > * {
+  width: 100%;
+}
+
 .dashboard {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 2.5rem 1.5rem 4rem;
+  flex: 1;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  min-height: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.dash-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+  gap: 2rem;
+  min-height: 0;
+  width: 100%;
+}
+
+.dash-col {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+
+.dash-header {
+  flex-shrink: 0;
+  margin-bottom: 1.5rem;
 }
 
 .dash-header h1 {
@@ -17,8 +58,31 @@
   margin: 0;
 }
 
+.dash-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2rem;
+  min-height: 0;
+}
+
+.dash-col {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.dash-col-main {
+  gap: 2rem;
+  overflow: hidden;
+}
+
+.dash-col-side {
+  gap: 1.5rem;
+}
+
 .dash-section {
-  margin-top: 2.5rem;
+  margin-top: 0;
 }
 
 .section-title {
@@ -30,7 +94,13 @@
   margin: 0 0 1rem;
 }
 
-/* Continue Card */
+.dash-section-fill {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
 .continue-card {
   display: block;
   background: #16161e;
@@ -108,62 +178,13 @@
   font-weight: 600;
 }
 
-/* Topics */
-.topics-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.topic-chip {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  border: 1px solid #2a2a3a;
-  background: #16161e;
-  color: #ccc;
-  font-size: 0.85rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: all 0.2s;
-  cursor: pointer;
-}
-
-.topic-chip:hover {
-  background: #1e1e2a;
-  color: #fff;
-}
-
-.topic-chip-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 0;
-}
-
-.topic-chip-icon svg {
-  width: 16px;
-  height: 16px;
-}
-
-.add-topic {
-  border-style: dashed;
-  color: #555;
-  font-family: inherit;
-}
-
-.add-topic:hover {
-  color: #888;
-  border-color: #444;
-}
-
-/* Activity */
 .activity-list {
+  flex: 1;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 0;
+  padding-right: 4px;
 }
 
 .activity-item {
@@ -194,21 +215,10 @@
   background: #7c6aef;
 }
 
-.activity-dot.complete {
-  background: #4ade80;
-}
-
-.activity-dot.practice {
-  background: #60a5fa;
-}
-
-.activity-dot.start {
-  background: #fbbf24;
-}
-
-.activity-dot.review {
-  background: #a78bfa;
-}
+.activity-dot.complete { background: #4ade80; }
+.activity-dot.practice { background: #60a5fa; }
+.activity-dot.start    { background: #fbbf24; }
+.activity-dot.review   { background: #a78bfa; }
 
 .activity-content {
   flex: 1;
@@ -235,4 +245,88 @@
   color: #555;
   font-size: 0.8rem;
   flex-shrink: 0;
+}
+
+.topics-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.topic-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #2a2a3a;
+  background: #16161e;
+  color: #ccc;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.topic-chip:hover {
+  background: #1e1e2a;
+  color: #fff;
+}
+
+.topic-chip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.topic-chip-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.topic-chip-name {
+  flex: 1;
+  text-align: left;
+}
+
+.add-topic {
+  border-style: dashed;
+  color: #555;
+  font-family: inherit;
+  justify-content: center;
+}
+
+.add-topic:hover {
+  color: #888;
+  border-color: #444;
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    height: auto;
+    min-height: 100vh;
+    overflow: auto;
+    padding: 1.5rem;
+  }
+
+  .dash-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .dash-col-main {
+    overflow: visible;
+  }
+
+  .activity-list {
+    overflow: visible;
+  }
+
+  .dash-section-fill {
+    flex: none;
+  }
 }
