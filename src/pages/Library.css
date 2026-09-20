@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   scrollbar-gutter: stable;
 }
@@ -11,7 +17,6 @@ html {
 }
 
 .lib-header {
-  flex-shrink: 0;
   margin-bottom: 1.5rem;
 }
 
@@ -37,7 +42,6 @@ html {
 }
 
 .search-wrap {
-  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 0.65rem;
@@ -95,16 +99,6 @@ html {
   color: #ccc;
 }
 
-.lib-topics {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding-right: 4px;
-  margin-bottom: 1rem;
-}
 
 .lib-topic-group {
   position: relative;
@@ -257,7 +251,6 @@ html {
 }
 
 .generate-btn {
-  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -293,14 +286,101 @@ html {
 
 @media (max-width: 768px) {
   .library {
-    height: auto;
-    min-height: 100vh;
-    overflow: auto;
-    padding: 1.5rem;
+    padding: 1.25rem 1rem 2rem;
+  }
+
+  .lib-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .lib-subtitle {
+    font-size: 0.875rem;
+  }
+
+  .search-wrap {
+    padding: 0.75rem 0.9rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .search-input {
+    font-size: 16px;
   }
 
   .lib-topics {
+    gap: 1rem;
+  }
+
+  .lib-topic-group {
+    padding: 1rem 1rem 0.9rem;
+    border-radius: 12px;
+  }
+
+  .lib-topic-group::before {
+    top: 1rem;
+    bottom: 1rem;
+  }
+
+  .lib-lesson-row {
+    gap: 0.5rem;
+    padding: 0.75rem 0.5rem;
+    margin: 0 -0.5rem;
+    min-height: 44px;
+  }
+
+  .lib-lesson-title {
+    font-size: 0.875rem;
+  }
+
+  .lib-difficulty {
+    font-size: 0.58rem;
+    padding: 0.2rem 0.45rem;
+  }
+
+  .generate-btn {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .library {
+    padding: 1rem 0.75rem 1.5rem;
+  }
+
+  .lib-header h1 {
+    font-size: 1.35rem;
+  }
+
+  .lib-topic-name {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .lib-topic-count {
+    font-size: 0.62rem;
+    padding: 0.24rem 0.5rem;
+  }
+
+  .lib-lesson-row {
+    align-items: flex-start;
+  }
+
+  /* Let long lesson titles wrap instead of truncating */
+  .lib-lesson-title {
+    white-space: normal;
     overflow: visible;
+    text-overflow: clip;
+    line-height: 1.35;
+  }
+
+  .lib-lesson-progress {
+    display: none;
+  }
+
+  .generate-btn {
+    padding: 0.8rem;
+    font-size: 0.875rem;
   }
 }
 
