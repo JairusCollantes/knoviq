@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard';
 import Learn from './pages/Learn';
 import Library from './pages/Library';
-// import Results from './pages/Results';
+import Results from './pages/Results';
 // import Profile from './pages/Profile';
 
 export default function App() {
@@ -15,8 +15,8 @@ export default function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/learn/:lessonId" element={<Learn />} />
         <Route path="/library" element={<Library />} />
-        {/* <Route path="/results/:attemptId" element={<Results />} />
-        <Route path="/profile" element={<Profile />} /> */}
+        <Route path="/results/:attemptId" element={<Results />} />
+        {/* <Route path="/profile" element={<Profile />} /> */}
       </Routes>
     </BrowserRouter>
   );
