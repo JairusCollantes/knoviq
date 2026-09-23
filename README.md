@@ -40,3 +40,4 @@ The goal is to make studying feel a little more interactive and less like starin
 This project is primarily being built as a learning project and portfolio piece.
 
 More coming soon.
+
