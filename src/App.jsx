@@ -4,7 +4,7 @@ import Dashboard from './pages/Dashboard';
 import Learn from './pages/Learn';
 import Library from './pages/Library';
 import Results from './pages/Results';
-// import Profile from './pages/Profile';
+import Profile from './pages/Profile';
 
 export default function App() {
   return (
@@ -16,7 +16,7 @@ export default function App() {
         <Route path="/learn/:lessonId" element={<Learn />} />
         <Route path="/library" element={<Library />} />
         <Route path="/results/:attemptId" element={<Results />} />
-        {/* <Route path="/profile" element={<Profile />} /> */}
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );
