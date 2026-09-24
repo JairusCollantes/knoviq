@@ -15,6 +15,7 @@ export default function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/learn/:lessonId" element={<Learn />} />
         <Route path="/library" element={<Library />} />
+        <Route path="/results" element={<Results />} />
         <Route path="/results/:attemptId" element={<Results />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>

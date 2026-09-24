@@ -1,7 +1,8 @@
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, Check, X, RotateCcw, LayoutDashboard, LibraryBig, CodeXml } from 'lucide-react';
 import './Results.css';
 
+// Hardcoded fallback data — same values as Dashboard / Library / Learn (like Learn.jsx does)
 const topic = { name: 'Java', color: '#f89820', icon: <CodeXml size={14} /> };
 const lessonMeta = {
   lessonId: 'java-oop',
@@ -103,31 +104,89 @@ const mockResult = {
   timestamp: new Date().toISOString(),
 };
 
-function loadAttempt(attemptId) {
-  if (!attemptId) return { data: mockResult, isDemo: true };
+function normalizeAttempt(raw) {
+  if (!raw || typeof raw !== 'object' || !Array.isArray(raw.answers)) return null;
+  const answers = raw.answers
+    .filter(Boolean)
+    .map((a) => ({
+      question: String(a.question ?? 'Untitled question'),
+      selected: a.selected ?? '—',
+      correct: a.correct ?? '—',
+      isCorrect: Boolean(a.isCorrect),
+      explanation: String(a.explanation ?? ''),
+    }));
+  if (answers.length === 0) return null;
+  return {
+    id: String(raw.id ?? 'attempt-unknown'),
+    lessonId: String(raw.lessonId ?? lessonMeta.lessonId),
+    lessonTitle: String(raw.lessonTitle ?? lessonMeta.lessonTitle),
+    topicName: String(raw.topicName ?? topic.name).trim() || topic.name,
+    topicColor: String(raw.topicColor ?? topic.color),
+    difficulty: String(raw.difficulty ?? lessonMeta.difficulty),
+    answers,
+    timestamp: String(raw.timestamp ?? new Date().toISOString()),
+  };
+}
+
+function loadAttempt(attemptId, stateAttempt) {
+  const fromState = normalizeAttempt(stateAttempt);
+  if (fromState) return { data: fromState, status: 'real' };
+  if (!attemptId) return { data: { ...mockResult }, status: 'demo' };
   try {
     const raw = localStorage.getItem(attemptId);
-    if (!raw) return { data: mockResult, isDemo: true };
+    if (!raw) return { data: null, status: 'not-found' };
     const parsed = JSON.parse(raw);
-    if (!parsed || !Array.isArray(parsed.answers)) return { data: mockResult, isDemo: true };
-    return {
-      data: {
-        ...mockResult,
-        ...parsed,
-        topicName: (parsed.topicName || mockResult.topicName).trim(),
-        difficulty: parsed.difficulty || mockResult.difficulty,
-      },
-      isDemo: false,
-    };
+    const normalized = normalizeAttempt(parsed);
+    if (!normalized) return { data: null, status: 'not-found' };
+    return { data: normalized, status: 'real' };
   } catch {
-    return { data: mockResult, isDemo: true };
+    return { data: null, status: 'not-found' };
   }
 }
 
 export default function Results() {
   const { attemptId } = useParams();
   const navigate = useNavigate();
-  const { data } = loadAttempt(attemptId);
+  const location = useLocation();
+  const { data, status } = loadAttempt(attemptId, location.state?.attempt);
+
+  if (status === 'not-found' || !data) {
+    return (
+      <div className="results">
+        <header className="res-header">
+          <h1>Results</h1>
+          <p className="res-subtitle">Review your answers and keep the streak going.</p>
+        </header>
+
+        <section className="not-found-card">
+          <h2 className="not-found-title">Attempt not found</h2>
+          <p className="not-found-text">
+            This attempt{attemptId ? ` (${attemptId})` : ''} isn&apos;t in this browser.
+            It may have been opened in another browser, in private mode, or after storage was cleared.
+          </p>
+          <div className="score-actions">
+            <button
+              className="check-btn"
+              style={{ background: topic.color }}
+              onClick={() => navigate(`/learn/${lessonMeta.lessonId}`)}
+            >
+              <RotateCcw size={16} /> Retake Quiz
+            </button>
+            <Link to="/library" className="ghost-btn">
+              <LibraryBig size={16} /> Library
+            </Link>
+            <Link to="/dashboard" className="ghost-btn">
+              <LayoutDashboard size={16} /> Dashboard
+            </Link>
+          </div>
+        </section>
+
+        <button className="back-btn res-back" onClick={() => navigate('/library')}>
+          <ArrowLeft size={18} /> Back to Library
+        </button>
+      </div>
+    );
+  }
 
   const total = data.answers.length;
   const correctCount = data.answers.filter((a) => a.isCorrect).length;
@@ -140,6 +199,12 @@ export default function Results() {
         <h1>Results</h1>
         <p className="res-subtitle">Review your answers and keep the streak going.</p>
       </header>
+
+      {status === 'demo' && (
+        <div className="demo-banner">
+          Demo data — finish a quiz to see your own attempt here.
+        </div>
+      )}
 
       <section className="score-card">
         <div className="score-top">

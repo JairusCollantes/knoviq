@@ -257,6 +257,16 @@ export default function Learn() {
 
   function handleNext() {
     if (currentQ + 1 >= totalQ) {
+      const lastAnswer = {
+        question: q.question,
+        selected,
+        correct: q.answer,
+        isCorrect: selected === q.answer,
+        explanation: q.explanation,
+        options: q.options,
+      };
+      const alreadySaved = answers.some((a) => a.question === q.question);
+      const finalAnswers = alreadySaved ? answers : [...answers, lastAnswer];
       const attemptId = `attempt-${Date.now()}`;
       const attemptData = {
         id: attemptId,
@@ -264,11 +274,16 @@ export default function Learn() {
         lessonTitle: assignment.title,
         topicName: topic.name,
         topicColor: topic.color,
-        answers,
+        difficulty: assignment.difficulty,
+        answers: finalAnswers,
         timestamp: new Date().toISOString(),
       };
-      localStorage.setItem(attemptId, JSON.stringify(attemptData));
-      navigate(`/results/${attemptId}`);
+      try {
+        localStorage.setItem(attemptId, JSON.stringify(attemptData));
+      } catch {
+        // private-mode/quota: still navigate with state backup below
+      }
+      navigate(`/results/${attemptId}`, { state: { attempt: attemptData } });
     } else {
       setCurrentQ((c) => c + 1);
       setSelected(null);
