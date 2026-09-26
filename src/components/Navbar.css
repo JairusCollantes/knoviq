@@ -1,6 +1,4 @@
-/* ============================================================
-   Navbar — responsive
-   ============================================================ */
+
 .navbar {
   display: flex;
   align-items: center;
@@ -11,8 +9,8 @@
   flex-shrink: 0;
   width: 100%;
   box-sizing: border-box;
-  background: #0f0f13;
-  border-bottom: 1px solid #1e1e2a;
+  background: #0a0a0a;
+  border-bottom: 1px solid #262626;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -22,7 +20,8 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  min-width: 0;               /* lets text truncate if needed */
+  min-width: 0;               
+  color: var(--accent, #ff2e88);
 }
 
 .brand-icon {
@@ -53,23 +52,26 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  border-radius: 8px;
-  color: #888;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  color: #a3a3a3;
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
   white-space: nowrap;
-  transition: color 0.2s ease, background 0.2s ease;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
 .nav-link:hover {
-  color: #ccc;
-  background: #1a1a24;
+  color: #fff;
+  background: #1a1a1a;
+  border-color: #262626;
 }
 
 .nav-link.active {
   color: #fff;
-  background: #1e1e2e;
+  background: rgba(255, 46, 136, 0.16);
+  border-color: rgba(255, 46, 136, 0.4);
 }
 
 .nav-icon {
@@ -78,9 +80,6 @@
   flex-shrink: 0;
 }
 
-/* ============================================================
-   Tablet — tighter padding, tighter links
-   ============================================================ */
 @media (max-width: 640px) {
   .navbar {
     padding: 0 1rem;
@@ -103,9 +102,6 @@
   }
 }
 
-/* ============================================================
-   Phone — icon-only links, no text
-   ============================================================ */
 @media (max-width: 480px) {
   .navbar {
     padding: 0 0.75rem;
@@ -116,7 +112,6 @@
     font-size: 0.95rem;
   }
 
-  /* Hide link labels, keep just the icons */
   .nav-link {
     padding: 0.55rem;
     font-size: 0;
@@ -127,8 +122,6 @@
     font-size: 1.25rem;
   }
 
-  /* If you use lucide icons instead of emoji,
-     target the svg directly: */
   .nav-link svg {
     width: 20px;
     height: 20px;
