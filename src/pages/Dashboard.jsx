@@ -1,14 +1,10 @@
 import { Link } from 'react-router-dom';
-import { CodeXml, SquareFunction } from 'lucide-react';
+import { topics, topicById, recentActivity, continueLearning } from '../data/Data';
 import './Dashboard.css';
 
-const topics = [
-  { id: 'java', name: 'Java', color: '#4a9eff', icon: <CodeXml /> },
-  { id: 'cpp', name: 'C++', color: '#eab308', icon: <CodeXml /> },
-  { id: 'calculus', name: 'Calculus', color: '#e74c3c', icon: <SquareFunction /> },
-];
-
 export default function Dashboard() {
+  const topicColor = topicById(continueLearning.topicId).color;
+
   return (
     <div className="dashboard">
       <header className="dash-header">
@@ -21,29 +17,29 @@ export default function Dashboard() {
           <section className="dash-section">
             <h2 className="section-title">Continue Learning</h2>
 
-            <Link to="/learn/1" className="continue-card">
+            <Link to={`/learn/${continueLearning.lessonId}`} className="continue-card">
               <div className="continue-card-top">
                 <span
                   className="topic-badge"
-                  style={{ background: '#4a9eff22', color: '#4a9eff' }}
+                  style={{ background: topicColor + '22', color: topicColor }}
                 >
-                  <CodeXml />
-                  Intro to JavaScript
+                  <continueLearning.icon />
+                  {continueLearning.badge}
                 </span>
-                <span className="continue-pct">50%</span>
+                <span className="continue-pct">{continueLearning.pct}%</span>
               </div>
 
-              <h3 className="continue-title">Getting Started with Variables</h3>
+              <h3 className="continue-title">{continueLearning.title}</h3>
 
               <div className="progress-bar-track">
                 <div
                   className="progress-bar-fill"
-                  style={{ width: '50%', background: '#4a9eff' }}
+                  style={{ width: `${continueLearning.pct}%`, background: topicColor }}
                 />
               </div>
 
               <div className="continue-meta">
-                <span>5/10 completed</span>
+                <span>{continueLearning.completed}/{continueLearning.total} completed</span>
                 <span className="continue-btn">Continue →</span>
               </div>
             </Link>
@@ -52,10 +48,7 @@ export default function Dashboard() {
           <section className="dash-section dash-section-fill">
             <h2 className="section-title">Recent Activity</h2>
             <div className="activity-list">
-              {[
-                { id: 1, text: 'Completed Java OOP Basics', score: '8/10', time: '2 hours ago', type: 'complete' },
-                { id: 2, text: 'Practiced C++ Linked Lists', score: '9/10', time: '5 hours ago', type: 'practice' },
-              ].map((a) => (
+              {recentActivity.map((a) => (
                 <div key={a.id} className="activity-item">
                   <div className="activity-dot-wrap">
                     <span className={`activity-dot ${a.type}`} />
@@ -83,7 +76,7 @@ export default function Dashboard() {
                   style={{ borderColor: t.color + '44' }}
                 >
                   <span className="topic-chip-icon" style={{ color: t.color }}>
-                    {t.icon}
+                    <t.icon />
                   </span>
                   <span className="topic-chip-name">{t.name}</span>
                 </Link>
