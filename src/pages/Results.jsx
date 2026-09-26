@@ -3,7 +3,7 @@ import { ArrowLeft, Check, X, RotateCcw, LayoutDashboard, LibraryBig, CodeXml } 
 import './Results.css';
 
 // Hardcoded fallback data — same values as Dashboard / Library / Learn (like Learn.jsx does)
-const topic = { name: 'Java', color: '#f89820', icon: <CodeXml size={14} /> };
+const topic = { name: 'Java', color: '#4a9eff', icon: <CodeXml size={14} /> };
 const lessonMeta = {
   lessonId: 'java-oop',
   lessonTitle: 'OOP Basics',

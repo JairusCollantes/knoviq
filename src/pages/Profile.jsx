@@ -11,8 +11,8 @@ const user = {
 };
 
 const topics = [
-  { id: 'java', name: 'Java', color: '#f89820', icon: <CodeXml /> },
-  { id: 'cpp', name: 'C++', color: '#00599C', icon: <CodeXml /> },
+  { id: 'java', name: 'Java', color: '#4a9eff', icon: <CodeXml /> },
+  { id: 'cpp', name: 'C++', color: '#eab308', icon: <CodeXml /> },
   { id: 'calculus', name: 'Calculus', color: '#e74c3c', icon: <SquareFunction /> },
 ];
 

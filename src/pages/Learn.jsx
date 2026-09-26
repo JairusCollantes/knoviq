@@ -5,7 +5,7 @@ import './Learn.css';
 
 const assignments = {
   'java-oop': {
-    topic: { name: 'Java ', color: '#f89820', icon: <CodeXml size={14} /> },
+    topic: { name: 'Java ', color: '#4a9eff', icon: <CodeXml size={14} /> },
     title: 'OOP Basics',
     difficulty: 'beginner',
     lesson: {
@@ -39,7 +39,7 @@ const assignments = {
     ]
   },
   'java-inheritance': {
-    topic: { name: 'Java ', color: '#f89820', icon: <CodeXml size={14} /> },
+    topic: { name: 'Java ', color: '#4a9eff', icon: <CodeXml size={14} /> },
     title: 'Inheritance',
     difficulty: 'intermediate',
     lesson: {
@@ -73,7 +73,7 @@ const assignments = {
     ]
   },
   'java-interfaces': {
-    topic: { name: 'Java ', color: '#f89820', icon: <CodeXml size={14} /> },
+    topic: { name: 'Java ', color: '#4a9eff', icon: <CodeXml size={14} /> },
     title: 'Interfaces',
     difficulty: 'intermediate',
     lesson: {
@@ -107,7 +107,7 @@ const assignments = {
     ]
   },
   'cpp-pointers': {
-    topic: { name: 'C++ ', color: '#00599C', icon: <CodeXml size={14} /> },
+    topic: { name: 'C++ ', color: '#eab308', icon: <CodeXml size={14} /> },
     title: 'Pointers',
     difficulty: 'advanced',
     lesson: {
@@ -141,7 +141,7 @@ const assignments = {
     ]
   },
   'cpp-linked-lists': {
-    topic: { name: 'C++ ', color: '#00599C', icon: <CodeXml size={14} /> },
+    topic: { name: 'C++ ', color: '#eab308', icon: <CodeXml size={14} /> },
     title: 'Linked Lists',
     difficulty: 'intermediate',
     lesson: {

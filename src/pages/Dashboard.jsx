@@ -3,8 +3,8 @@ import { CodeXml, SquareFunction } from 'lucide-react';
 import './Dashboard.css';
 
 const topics = [
-  { id: 'java', name: 'Java', color: '#f89820', icon: <CodeXml /> },
-  { id: 'cpp', name: 'C++', color: '#00599C', icon: <CodeXml /> },
+  { id: 'java', name: 'Java', color: '#4a9eff', icon: <CodeXml /> },
+  { id: 'cpp', name: 'C++', color: '#eab308', icon: <CodeXml /> },
   { id: 'calculus', name: 'Calculus', color: '#e74c3c', icon: <SquareFunction /> },
 ];
 
@@ -25,7 +25,7 @@ export default function Dashboard() {
               <div className="continue-card-top">
                 <span
                   className="topic-badge"
-                  style={{ background: '#f8982022', color: '#f89820' }}
+                  style={{ background: '#4a9eff22', color: '#4a9eff' }}
                 >
                   <CodeXml />
                   Intro to JavaScript
@@ -38,7 +38,7 @@ export default function Dashboard() {
               <div className="progress-bar-track">
                 <div
                   className="progress-bar-fill"
-                  style={{ width: '50%', background: '#f89820' }}
+                  style={{ width: '50%', background: '#4a9eff' }}
                 />
               </div>
 
