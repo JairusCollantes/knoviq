@@ -90,7 +90,7 @@ export default function Learn() {
         </button>
         <div className="learn-topbar-info">
           <span className="learn-topic-badge" style={{ background: topic.color + '22', color: topic.color }}>
-            <span className="badge-icon" style={{ color: topic.color }}>{topic.icon}</span>
+            <span className="badge-icon" style={{ color: topic.color }}><topic.icon size={14}/></span>
             {topic.name}
           </span>
           <span className="learn-lesson-title">{assignment.title}</span>
