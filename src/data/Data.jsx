@@ -14,9 +14,9 @@ export function topicById(topicId) {
 }
 
 export const continueLearning = {
-  lessonId: '1',
+  lessonId: 'java-oop',
   badge: 'Intro to JavaScript',
-  topicId: 'java-oop',
+  topicId: 'java',
   title: 'Getting Started with Variables',
   pct: 50,
   completed: 5,
