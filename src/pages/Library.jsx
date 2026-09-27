@@ -1,22 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CodeXml, SquareFunction, Search, Plus } from 'lucide-react';
+import { Search, Plus } from 'lucide-react';
+import { topics, lessons } from '../data/Data';
 import './Library.css';
-
-const topics = [
-  { id: 'java', name: 'Java', color: '#4a9eff', icon: <CodeXml /> },
-  { id: 'cpp', name: 'C++', color: '#eab308', icon: <CodeXml /> },
-  { id: 'calculus', name: 'Calculus', color: '#e74c3c', icon: <SquareFunction /> },
-];
-
-const lessons = [
-  { id: 'java-oop', topicId: 'java', title: 'OOP Basics', difficulty: 'beginner', progress: 8, total: 10 },
-  { id: 'java-inheritance', topicId: 'java', title: 'Inheritance', difficulty: 'intermediate', progress: 9, total: 10 },
-  { id: 'java-interfaces', topicId: 'java', title: 'Interfaces', difficulty: 'intermediate', progress: 7, total: 10 },
-  { id: 'cpp-pointers', topicId: 'cpp', title: 'Pointers', difficulty: 'advanced', progress: 6, total: 10 },
-  { id: 'cpp-linked-lists', topicId: 'cpp', title: 'Linked Lists', difficulty: 'intermediate', progress: 9, total: 10 },
-  { id: 'calc-limits', topicId: 'calculus', title: 'Limits & Continuity', difficulty: 'beginner', progress: 5, total: 10 },
-];
 
 export default function Library() {
   const [search, setSearch] = useState('');
@@ -67,7 +53,7 @@ export default function Library() {
           >
             <div className="lib-topic-header">
               <span className="lib-topic-icon" style={{ color: t.color }}>
-                {t.icon}
+                <t.icon />
               </span>
               <h2 className="lib-topic-name">{t.name}</h2>
               <span className="lib-topic-count">
