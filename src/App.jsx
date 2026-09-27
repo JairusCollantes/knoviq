@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import { DotBackgroundDemo } from './components/dot-background-demo';
 import Dashboard from './pages/Dashboard';
 import Learn from './pages/Learn';
 import Library from './pages/Library';
@@ -10,6 +11,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Navbar />
+      <DotBackgroundDemo >
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="/dashboard" element={<Dashboard />} />
@@ -19,6 +21,7 @@ export default function App() {
         <Route path="/results/:attemptId" element={<Results />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
+      </DotBackgroundDemo>
     </BrowserRouter>
   );
 }
