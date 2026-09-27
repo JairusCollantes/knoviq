@@ -1,45 +1,6 @@
 import { Link } from 'react-router-dom';
-import { CodeXml, SquareFunction, Flame, Target, Trophy, BookOpen } from 'lucide-react';
+import { user, topics, lessons, recentActivity, stats, topicById } from '../data/Data';
 import './Profile.css';
-
-const user = {
-  name: 'Raora Panthera',
-  handle: '@raoraPanthera',
-  initials: 'RP',
-  joined: 'January 2026',
-  bio: 'Learning Java, C++ and Calculus one quiz at a time.',
-};
-
-const topics = [
-  { id: 'java', name: 'Java', color: '#4a9eff', icon: <CodeXml /> },
-  { id: 'cpp', name: 'C++', color: '#eab308', icon: <CodeXml /> },
-  { id: 'calculus', name: 'Calculus', color: '#e74c3c', icon: <SquareFunction /> },
-];
-
-const lessons = [
-  { id: 'java-oop', topicId: 'java', title: 'OOP Basics', difficulty: 'beginner', progress: 8, total: 10 },
-  { id: 'java-inheritance', topicId: 'java', title: 'Inheritance', difficulty: 'intermediate', progress: 9, total: 10 },
-  { id: 'java-interfaces', topicId: 'java', title: 'Interfaces', difficulty: 'intermediate', progress: 7, total: 10 },
-  { id: 'cpp-pointers', topicId: 'cpp', title: 'Pointers', difficulty: 'advanced', progress: 6, total: 10 },
-  { id: 'cpp-linked-lists', topicId: 'cpp', title: 'Linked Lists', difficulty: 'intermediate', progress: 9, total: 10 },
-  { id: 'calc-limits', topicId: 'calculus', title: 'Limits & Continuity', difficulty: 'beginner', progress: 5, total: 10 },
-];
-
-const recentActivity = [
-  { id: 1, text: 'Completed Java OOP Basics', score: '8/10', time: '2 hours ago', type: 'complete' },
-  { id: 2, text: 'Practiced C++ Linked Lists', score: '9/10', time: '5 hours ago', type: 'practice' },
-];
-
-const stats = [
-  { id: 'quizzes', label: 'Quizzes Taken', value: '24', icon: <Trophy size={16} /> },
-  { id: 'avg', label: 'Avg Score', value: '78%', icon: <Target size={16} /> },
-  { id: 'streak', label: 'Day Streak', value: '12', icon: <Flame size={16} /> },
-  { id: 'lessons', label: 'Lessons', value: '6', icon: <BookOpen size={16} /> },
-];
-
-function topicById(topicId) {
-  return topics.find((t) => t.id === topicId) || topics[0];
-}
 
 export default function Profile() {
   return (
@@ -67,7 +28,7 @@ export default function Profile() {
         <div className="stats-grid">
           {stats.map((s) => (
             <div key={s.id} className="stat-card">
-              <span className="stat-icon">{s.icon}</span>
+              <span className="stat-icon"><s.icon size = {16}/></span>
               <span className="stat-value">{s.value}</span>
               <span className="stat-label">{s.label}</span>
             </div>
@@ -140,7 +101,7 @@ export default function Profile() {
                   style={{ borderColor: t.color + '44' }}
                 >
                   <span className="topic-chip-icon" style={{ color: t.color }}>
-                    {t.icon}
+                    <t.icon/>
                   </span>
                   <span className="topic-chip-name">{t.name}</span>
                 </Link>

@@ -1,6 +1,10 @@
 import {
   CodeXml,
-  SquareFunction
+  SquareFunction,
+  Target,
+  Flame,
+  Trophy,
+  BookOpen
 } from 'lucide-react';
 
 export const topics = [
@@ -247,4 +251,121 @@ export const assignments = {
       { type: 'multiple_choice', question: 'If lim(x→3⁻) f(x) = 5 and lim(x→3⁺) f(x) = 5, what is lim(x→3) f(x)?', options: ['Does not exist', '5', '10', 'Cannot be determined'], answer: '5', explanation: 'When both one-sided limits exist and are equal, the two-sided limit equals that value.' }
     ]
   }
+};
+
+export const user = {
+  name: 'Raora Panthera',
+  handle: '@raoraPanthera',
+  initials: 'RP',
+  joined: 'January 2026',
+  bio: 'Learning Java, C++ and Calculus one quiz at a time.',
+};
+
+export const stats = [
+  { id: 'quizzes', label: 'Quizzes Taken', value: '24', icon: Trophy },
+  { id: 'avg', label: 'Avg Score', value: '78%', icon: Target },
+  { id: 'streak', label: 'Day Streak', value: '12', icon: Flame },
+  { id: 'lessons', label: 'Lessons', value: '6', icon: BookOpen },
+];
+
+export const demoTopic = { name: 'Java', color: '#4a9eff', icon: CodeXml };
+
+export const demoLessonMeta = {
+  lessonId: 'java-oop',
+  lessonTitle: 'OOP Basics',
+  difficulty: 'beginner',
+};
+
+export const demoAnswers = [
+  {
+    question: 'What does OOP stand for?',
+    options: ['Object Oriented Programming', 'Object Only Programming', 'Optimal Object Protocol', 'Ordered Operation Process'],
+    selected: 'Object Oriented Programming',
+    correct: 'Object Oriented Programming',
+    isCorrect: true,
+    explanation: 'OOP stands for Object Oriented Programming.',
+  },
+  {
+    question: 'What is a class in Java?',
+    options: ['An instance of an object', 'A blueprint for creating objects', 'A static method', 'A primitive data type'],
+    selected: 'A blueprint for creating objects',
+    correct: 'A blueprint for creating objects',
+    isCorrect: true,
+    explanation: 'A class acts as a template or blueprint from which objects are created.',
+  },
+  {
+    question: 'Which keyword is used to create an object?',
+    options: ['class', 'object', 'new', 'create'],
+    selected: 'new',
+    correct: 'new',
+    isCorrect: true,
+    explanation: 'The "new" keyword is used to instantiate (create) an object from a class.',
+  },
+  {
+    question: 'What is encapsulation?',
+    options: ['Hiding data and restricting access', 'Creating multiple objects', 'Inheriting from a parent', 'Overriding methods'],
+    selected: 'Hiding data and restricting access',
+    correct: 'Hiding data and restricting access',
+    isCorrect: true,
+    explanation: 'Encapsulation bundles data and methods, restricting direct access to internal state.',
+  },
+  {
+    question: 'Which access modifier is the most restrictive?',
+    options: ['public', 'protected', 'private', 'default'],
+    selected: 'protected',
+    correct: 'private',
+    isCorrect: false,
+    explanation: '"private" restricts access to only within the declaring class.',
+  },
+  {
+    question: 'What is a constructor?',
+    options: ['A method that destroys objects', 'A special method called when an object is created', 'A static method', 'An interface method'],
+    selected: 'A special method called when an object is created',
+    correct: 'A special method called when an object is created',
+    isCorrect: true,
+    explanation: 'Constructors initialize objects when they are instantiated.',
+  },
+  {
+    question: 'Can a class have multiple constructors?',
+    options: ['No', 'Yes, through overloading', 'Only if they are private', 'Only one default constructor'],
+    selected: 'Yes, through overloading',
+    correct: 'Yes, through overloading',
+    isCorrect: true,
+    explanation: 'Java supports constructor overloading (same name, different parameters).',
+  },
+  {
+    question: 'What does the "this" keyword refer to?',
+    options: ['The parent class', 'The current object instance', 'A static reference', 'The main method'],
+    selected: 'The current object instance',
+    correct: 'The current object instance',
+    isCorrect: true,
+    explanation: '"this" refers to the current instance of the class.',
+  },
+  {
+    question: 'What is method overloading?',
+    options: ['Same name, different parameters', 'Same name, same parameters', 'Overriding a parent method', 'Calling a method recursively'],
+    selected: 'Overriding a parent method',
+    correct: 'Same name, different parameters',
+    isCorrect: false,
+    explanation: 'Overloading means multiple methods with the same name but different parameter lists.',
+  },
+  {
+    question: 'Which of these is NOT a pillar of OOP?',
+    options: ['Encapsulation', 'Polymorphism', 'Compilation', 'Abstraction'],
+    selected: 'Compilation',
+    correct: 'Compilation',
+    isCorrect: true,
+    explanation: 'The four pillars are Encapsulation, Abstraction, Inheritance, and Polymorphism.',
+  },
+];
+
+export const demoResult = {
+  id: 'attempt-demo',
+  lessonId: demoLessonMeta.lessonId,
+  lessonTitle: demoLessonMeta.lessonTitle,
+  topicName: demoTopic.name,
+  topicColor: demoTopic.color,
+  difficulty: demoLessonMeta.difficulty,
+  answers: demoAnswers,
+  timestamp: new Date().toISOString(),
 };

@@ -2,7 +2,6 @@ import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, Check, X, RotateCcw, LayoutDashboard, LibraryBig, CodeXml } from 'lucide-react';
 import './Results.css';
 
-// Hardcoded fallback data — same values as Dashboard / Library / Learn (like Learn.jsx does)
 const topic = { name: 'Java', color: '#4a9eff', icon: <CodeXml size={14} /> };
 const lessonMeta = {
   lessonId: 'java-oop',
