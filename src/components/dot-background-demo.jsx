@@ -1,6 +1,5 @@
 // src/components/dot-background-demo.jsx
 import { cn } from "@/lib/utils";
-import React from "react";
 
 export function DotBackgroundDemo({ children }) {
   return (

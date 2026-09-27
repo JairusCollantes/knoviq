@@ -10,8 +10,8 @@ import Profile from './pages/Profile';
 export default function App() {
   return (
     <BrowserRouter>
-      <Navbar />
       <DotBackgroundDemo >
+      <Navbar />
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="/dashboard" element={<Dashboard />} />
