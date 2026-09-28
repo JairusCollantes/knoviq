@@ -7,7 +7,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 1rem 2rem 1.25rem;
   overflow: hidden;
   animation: fadeUp 0.35s ease;
 }
@@ -30,7 +30,7 @@
 
 .dash-header {
   flex-shrink: 0;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .dash-header h1 {
@@ -288,6 +288,55 @@
   color: var(--accent, #ff2e88);
   border-color: var(--accent-border, rgba(255, 46, 136, 0.4));
   background: var(--accent-soft, rgba(255, 46, 136, 0.12));
+}
+
+.dash-streak-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  text-align: center;
+  padding: 1.25rem 1rem 1.1rem;
+  border-radius: 16px;
+  border: 1px solid #262626;
+  background: #111111;
+  animation: fadeUp 0.35s ease;
+}
+
+.dash-streak-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: var(--accent, #ff2e88);
+  background: var(--accent-soft, rgba(255, 46, 136, 0.12));
+  border: 1px solid var(--accent-border, rgba(255, 46, 136, 0.4));
+  line-height: 0;
+  margin-bottom: 0.35rem;
+}
+
+.dash-streak-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.dash-streak-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #737373;
+}
+
+.dash-streak-sub {
+  font-size: 0.8rem;
+  color: #a3a3a3;
+  margin: 0.35rem 0 0;
+  line-height: 1.4;
 }
 
 @media (max-width: 768px) {

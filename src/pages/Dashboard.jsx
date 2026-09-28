@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
-import { topics, topicById, recentActivity, continueLearning } from '../data/Data';
+import { topics, topicById, recentActivity, continueLearning, stats } from '../data/Data';
 import './Dashboard.css';
 
 export default function Dashboard() {
   const topicColor = topicById(continueLearning.topicId).color;
+  const streak = stats.find((s) => s.id === 'streak');
 
   return (
     <div className="dashboard">
@@ -82,6 +83,18 @@ export default function Dashboard() {
                 </Link>
               ))}
               <button className="topic-chip add-topic">+ Add Topic</button>
+            </div>
+          </section>
+
+          <section className="dash-section">
+            <h2 className="section-title">Day Streak</h2>
+            <div className="dash-streak-card">
+              <span className="dash-streak-icon">
+                <streak.icon size={22} />
+              </span>
+              <span className="dash-streak-value">{streak.value}</span>
+              <span className="dash-streak-label">days in a row</span>
+              <p className="dash-streak-sub">Quiz today to keep it burning.</p>
             </div>
           </section>
         </aside>
