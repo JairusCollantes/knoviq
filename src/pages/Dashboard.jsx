@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom';
-import { topicById, continueLearning, stats, upNextLessons } from '../data/Data';
+import { topics, topicById, continueLearning, upNextLessons } from '../data/Data';
 import './Dashboard.css';
 
 export default function Dashboard() {
   const topicColor = topicById(continueLearning.topicId).color;
-  const streak = stats.find((s) => s.id === 'streak');
   const upNext = upNextLessons(3);
-  const topPick = upNext[0];
 
   return (
     <div className="dashboard">
@@ -20,7 +18,11 @@ export default function Dashboard() {
           <section className="dash-section">
             <h2 className="section-title">Continue Learning</h2>
 
-            <Link to={`/learn/${continueLearning.lessonId}`} className="continue-card">
+            <Link
+              to={`/learn/${continueLearning.lessonId}`}
+              className="continue-card continue-hero"
+              style={{ borderLeftColor: topicColor }}
+            >
               <div className="continue-card-top">
                 <span
                   className="topic-badge"
@@ -79,20 +81,22 @@ export default function Dashboard() {
 
         <aside className="dash-col dash-col-side">
           <section className="dash-section">
-            <h2 className="section-title">Day Streak</h2>
-            <div className="dash-streak-card">
-              <span className="dash-streak-icon">
-                <streak.icon size={22} />
-              </span>
-              <span className="dash-streak-value">{streak.value}</span>
-              <span className="dash-streak-label">days in a row</span>
-              <p className="dash-streak-sub">
-                {topPick ? (
-                  <>Quiz <strong>{topPick.title}</strong> today to keep it burning.</>
-                ) : (
-                  'Quiz today to keep it burning.'
-                )}
-              </p>
+            <h2 className="section-title">Your Topics</h2>
+            <div className="topics-list">
+              {topics.map((t) => (
+                <Link
+                  key={t.id}
+                  to="/library"
+                  className="topic-chip"
+                  style={{ borderColor: t.color + '44' }}
+                >
+                  <span className="topic-chip-icon" style={{ color: t.color }}>
+                    <t.icon />
+                  </span>
+                  <span className="topic-chip-name">{t.name}</span>
+                </Link>
+              ))}
+              <button className="topic-chip add-topic">+ Add Topic</button>
             </div>
           </section>
         </aside>

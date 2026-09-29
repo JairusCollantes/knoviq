@@ -91,6 +91,33 @@
   transform: translateY(-2px);
 }
 
+.continue-hero {
+  padding: 1.5rem 1.75rem;
+  border-left-width: 3px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.continue-hero .continue-title {
+  font-size: 1.4rem;
+}
+
+.continue-hero .continue-pct {
+  font-size: 1.35rem;
+}
+
+.continue-hero .continue-btn {
+  background: var(--accent, #ff2e88);
+  color: #fff;
+  font-weight: 700;
+  padding: 0.55rem 1.25rem;
+  border-radius: 12px;
+  transition: filter 0.2s ease;
+}
+
+.continue-hero:hover .continue-btn {
+  filter: brightness(1.15);
+}
+
 .continue-card-top {
   display: flex;
   justify-content: space-between;
@@ -370,59 +397,7 @@
   text-align: right;
 }
 
-.dash-streak-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-  text-align: center;
-  padding: 1.25rem 1rem 1.1rem;
-  border-radius: 16px;
-  border: 1px solid #262626;
-  background: #111111;
-  animation: fadeUp 0.35s ease;
-}
-
-.dash-streak-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  color: var(--accent, #ff2e88);
-  background: var(--accent-soft, rgba(255, 46, 136, 0.12));
-  border: 1px solid var(--accent-border, rgba(255, 46, 136, 0.4));
-  line-height: 0;
-  margin-bottom: 0.35rem;
-}
-
-.dash-streak-value {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #fff;
-  line-height: 1;
-}
-
-.dash-streak-label {
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #737373;
-}
-
-.dash-streak-sub {
-  font-size: 0.8rem;
-  color: #a3a3a3;
-  margin: 0.35rem 0 0;
-  line-height: 1.4;
-}
-
-.dash-streak-sub strong {
-  color: #fff;
-  font-weight: 600;
-}
+/* Day Streak lives on Profile stats now — see Profile.css */
 
 @media (max-width: 768px) {
   .dashboard {
