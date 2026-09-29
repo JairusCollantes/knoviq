@@ -42,6 +42,30 @@ export const lessons = [
   { id: 'calc-limits', topicId: 'calculus', title: 'Limits & Continuity', difficulty: 'beginner', progress: 5, total: 10 },
 ];
 
+export function upNextLessons(count = 3) {
+  return lessons
+    .filter((l) => l.progress < l.total)
+    .map((l) => ({ ...l, pct: Math.round((l.progress / l.total) * 100) }))
+    .sort((a, b) => a.pct - b.pct)
+    .slice(0, count);
+}
+
+export function topicMastery() {
+  return topics.map((t) => {
+    const topicLessons = lessons.filter((l) => l.topicId === t.id);
+    const done = topicLessons.filter((l) => l.progress >= l.total).length;
+    const avgPct =
+      topicLessons.length === 0
+        ? 0
+        : Math.round(
+            (topicLessons.reduce((sum, l) => sum + l.progress / l.total, 0) /
+              topicLessons.length) *
+              100
+          );
+    return { topic: t, avgPct, done, total: topicLessons.length };
+  });
+}
+
 const rawAssignments = {
   'java-oop': {
     topicId: 'java',

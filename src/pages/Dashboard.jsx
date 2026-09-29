@@ -1,16 +1,18 @@
 import { Link } from 'react-router-dom';
-import { topics, topicById, recentActivity, continueLearning, stats } from '../data/Data';
+import { topicById, continueLearning, stats, upNextLessons } from '../data/Data';
 import './Dashboard.css';
 
 export default function Dashboard() {
   const topicColor = topicById(continueLearning.topicId).color;
   const streak = stats.find((s) => s.id === 'streak');
+  const upNext = upNextLessons(3);
+  const topPick = upNext[0];
 
   return (
     <div className="dashboard">
       <header className="dash-header">
-        <h1>Welcome back!</h1>
-        <p className="dash-subtitle">Here's where you left off.</p>
+        <h1>What should I do now?</h1>
+        <p className="dash-subtitle">Pick up where you left off, or tackle what's next.</p>
       </header>
 
       <div className="dash-grid">
@@ -46,46 +48,36 @@ export default function Dashboard() {
             </Link>
           </section>
 
-          <section className="dash-section dash-section-fill">
-            <h2 className="section-title">Recent Activity</h2>
-            <div className="activity-list">
-              {recentActivity.map((a) => (
-                <div key={a.id} className="activity-item">
-                  <div className="activity-dot-wrap">
-                    <span className={`activity-dot ${a.type}`} />
-                  </div>
-                  <div className="activity-content">
-                    <span className="activity-text">{a.text}</span>
-                    <span className="activity-score">{a.score}</span>
-                  </div>
-                  <span className="activity-time">{a.time}</span>
-                </div>
-              ))}
+          <section className="dash-section">
+            <h2 className="section-title">Up Next</h2>
+            <div className="dash-upnext-list">
+              {upNext.map((l) => {
+                const t = topicById(l.topicId);
+                return (
+                  <Link key={l.id} to={`/learn/${l.id}`} className="dash-upnext-row">
+                    <span className="dash-upnext-icon" style={{ color: t.color }}>
+                      <t.icon />
+                    </span>
+                    <span className="dash-upnext-title">{l.title}</span>
+                    <div className="dash-upnext-progress">
+                      <div className="dash-upnext-bar">
+                        <div
+                          className="dash-upnext-fill"
+                          style={{ width: `${l.pct}%`, background: t.color }}
+                        />
+                      </div>
+                      <span className="dash-upnext-score">
+                        {l.progress}/{l.total}
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </section>
         </div>
 
         <aside className="dash-col dash-col-side">
-          <section className="dash-section">
-            <h2 className="section-title">Your Topics</h2>
-            <div className="topics-list">
-              {topics.map((t) => (
-                <Link
-                  key={t.id}
-                  to="/library"
-                  className="topic-chip"
-                  style={{ borderColor: t.color + '44' }}
-                >
-                  <span className="topic-chip-icon" style={{ color: t.color }}>
-                    <t.icon />
-                  </span>
-                  <span className="topic-chip-name">{t.name}</span>
-                </Link>
-              ))}
-              <button className="topic-chip add-topic">+ Add Topic</button>
-            </div>
-          </section>
-
           <section className="dash-section">
             <h2 className="section-title">Day Streak</h2>
             <div className="dash-streak-card">
@@ -94,7 +86,13 @@ export default function Dashboard() {
               </span>
               <span className="dash-streak-value">{streak.value}</span>
               <span className="dash-streak-label">days in a row</span>
-              <p className="dash-streak-sub">Quiz today to keep it burning.</p>
+              <p className="dash-streak-sub">
+                {topPick ? (
+                  <>Quiz <strong>{topPick.title}</strong> today to keep it burning.</>
+                ) : (
+                  'Quiz today to keep it burning.'
+                )}
+              </p>
             </div>
           </section>
         </aside>
