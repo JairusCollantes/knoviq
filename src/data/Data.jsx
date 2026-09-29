@@ -42,9 +42,9 @@ export const lessons = [
   { id: 'calc-limits', topicId: 'calculus', title: 'Limits & Continuity', difficulty: 'beginner', progress: 5, total: 10 },
 ];
 
-export const assignments = {
+const rawAssignments = {
   'java-oop': {
-    topic: { name: 'Java ', color: '#4a9eff', icon: CodeXml },
+    topicId: 'java',
     title: 'OOP Basics',
     difficulty: 'beginner',
     lesson: {
@@ -78,7 +78,7 @@ export const assignments = {
     ]
   },
   'java-inheritance': {
-    topic: { name: 'Java ', color: '#4a9eff', icon: CodeXml },
+    topicId: 'java',
     title: 'Inheritance',
     difficulty: 'intermediate',
     lesson: {
@@ -112,7 +112,7 @@ export const assignments = {
     ]
   },
   'java-interfaces': {
-    topic: { name: 'Java ', color: '#4a9eff', icon: CodeXml },
+    topicId: 'java',
     title: 'Interfaces',
     difficulty: 'intermediate',
     lesson: {
@@ -146,7 +146,7 @@ export const assignments = {
     ]
   },
   'cpp-pointers': {
-    topic: { name: 'C++ ', color: '#eab308', icon: CodeXml },
+    topicId: 'cpp',
     title: 'Pointers',
     difficulty: 'advanced',
     lesson: {
@@ -180,7 +180,7 @@ export const assignments = {
     ]
   },
   'cpp-linked-lists': {
-    topic: { name: 'C++ ', color: '#eab308', icon: CodeXml },
+    topicId: 'cpp',
     title: 'Linked Lists',
     difficulty: 'intermediate',
     lesson: {
@@ -214,7 +214,7 @@ export const assignments = {
     ]
   },
   'calc-limits': {
-    topic: { name: 'Calculus ', color: '#e74c3c', icon: SquareFunction },
+    topicId: 'calculus',
     title: 'Limits & Continuity',
     difficulty: 'beginner',
     lesson: {
@@ -253,6 +253,15 @@ export const assignments = {
   }
 };
 
+function withSharedTopic(assignment) {
+  const t = topicById(assignment.topicId);
+  return { ...assignment, topic: { name: t.name, color: t.color, icon: t.icon } };
+}
+
+export const assignments = Object.fromEntries(
+  Object.entries(rawAssignments).map(([id, a]) => [id, withSharedTopic(a)])
+);
+
 export const user = {
   name: 'Raora Panthera',
   handle: '@raoraPanthera',
@@ -268,12 +277,12 @@ export const stats = [
   { id: 'lessons', label: 'Lessons', value: '6', icon: BookOpen },
 ];
 
-export const demoTopic = { name: 'Java', color: '#4a9eff', icon: CodeXml };
+export const demoTopic = { ...topicById('java') };
 
 export const demoLessonMeta = {
   lessonId: 'java-oop',
-  lessonTitle: 'OOP Basics',
-  difficulty: 'beginner',
+  lessonTitle: assignments['java-oop'].title,
+  difficulty: assignments['java-oop'].difficulty,
 };
 
 export const demoAnswers = [
