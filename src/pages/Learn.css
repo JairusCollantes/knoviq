@@ -485,6 +485,53 @@
   cursor: not-allowed;
 }
 
+@media (max-width: 768px) {
+  .learn-page {
+    padding: 1.25rem 1rem 2rem;
+  }
+
+  .study-card,
+  .question-card {
+    padding: 1.5rem;
+  }
+
+  .study-title {
+    font-size: 1.35rem;
+  }
+
+  .question-text {
+    font-size: 1.15rem;
+  }
+
+  .question-actions {
+    flex-direction: column;
+  }
+
+  .concept-explanation {
+    padding-left: 1.15rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .learn-page {
+    padding: 1rem 0.75rem 1.5rem;
+  }
+
+  .study-card,
+  .question-card {
+    padding: 1.25rem;
+    border-radius: 20px;
+  }
+
+  .learn-topbar {
+    flex-wrap: wrap;
+  }
+
+  .option-btn {
+    padding: 0.85rem 0.9rem;
+  }
+}
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
