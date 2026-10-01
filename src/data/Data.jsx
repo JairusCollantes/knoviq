@@ -40,6 +40,7 @@ export const lessons = [
   { id: 'cpp-pointers', topicId: 'cpp', title: 'Pointers', difficulty: 'advanced', progress: 6, total: 10 },
   { id: 'cpp-linked-lists', topicId: 'cpp', title: 'Linked Lists', difficulty: 'intermediate', progress: 9, total: 10 },
   { id: 'calc-limits', topicId: 'calculus', title: 'Limits & Continuity', difficulty: 'beginner', progress: 5, total: 10 },
+  { id: 'calc-derivatives', topicId: 'calculus', title: 'Derivatives', difficulty: 'intermediate', progress: 0, total: 8 },
 ];
 
 export function upNextLessons(count = 3) {
