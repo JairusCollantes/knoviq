@@ -384,12 +384,19 @@ export const demoAnswers = [
     explanation: 'Overloading means multiple methods with the same name but different parameter lists.',
   },
   {
-    question: 'Which of these is NOT a pillar of OOP?',
-    options: ['Encapsulation', 'Polymorphism', 'Compilation', 'Abstraction'],
-    selected: 'Compilation',
-    correct: 'Compilation',
-    isCorrect: true,
-    explanation: 'The four pillars are Encapsulation, Abstraction, Inheritance, and Polymorphism.',
+    type : 'matching',
+    question: 'Match each OOP pillar to its meaning.',
+    selected: '3/4 pairs',
+    correct: '4/4 pairs',
+    credit: 0.75,
+    isCorrect: false,
+    explanation: 'The four pillars are Encapsulation, Abstraction Inheritance and Polymorphism',
+    rows: [
+      { left : 'Encapsulation', picked: 'Bundling data and methods', expected: 'Bundling data and methods', ok: true},
+      { left : 'Inheritance', picked: 'Reusing parent behavior', expected: 'Reusing parent behavior', ok: true},
+      { left : 'Polymorphism', picked: 'Bundling data and methods', expected: 'Same interface, many forms', ok: false},
+      { left : 'Abstraction', picked: 'Hiding implementation details', expected: 'Hiding implementation details', ok: true},
+    ]
   },
 ];
 

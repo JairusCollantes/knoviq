@@ -3,17 +3,42 @@ import { ArrowLeft, Check, X, RotateCcw, LayoutDashboard, LibraryBig } from 'luc
 import { demoTopic, demoLessonMeta, demoResult } from '../data/Data';
 import './Results.css';
 
+function normalizedCredit(raw, isCorrect){
+  const n = Number(raw);
+  if (Number.isFinite(n))
+    return Math.min(1, Math.max(0, n));
+  return isCorrect ? 1 : 0;
+}
+
+function verdictOf(answer) {
+  const credit = answer.credit ?? (answer.isCorrect ? 1 : 0);
+  if (credit === 1) return 'good';
+  if (credit > 0) return 'partial'; 
+  return 'bad';
+}
+
 function normalizeAttempt(raw) {
   if (!raw || typeof raw !== 'object' || !Array.isArray(raw.answers)) return null;
   const answers = raw.answers
     .filter(Boolean)
-    .map((a) => ({
-      question: String(a.question ?? 'Untitled question'),
-      selected: a.selected ?? '—',
-      correct: a.correct ?? '—',
-      isCorrect: Boolean(a.isCorrect),
-      explanation: String(a.explanation ?? ''),
-    }));
+    .map((a) => {
+      const isCorrect = Boolean(a.isCorrect);
+      return {
+          question: String(a.question ?? 'Untitled question'),
+          type: String(a.type ?? 'multiple_choice'),
+          selected: String(a.selected ?? '—'),
+          correct: String(a.correct ?? '—'),
+          credit : normalizedCredit(a.credit, isCorrect),
+          isCorrect,
+          explanation: String(a.explanation ?? ''),
+      }
+      // question: String(a.question ?? 'Untitled question'),
+      // selected: a.selected ?? '—',
+      // correct: a.correct ?? '—',
+      // isCorrect: Boolean(a.isCorrect),
+      // explanation: String(a.explanation ?? ''),
+    }
+  );
   if (answers.length === 0) return null;
   return {
     id: String(raw.id ?? 'attempt-unknown'),
@@ -162,33 +187,51 @@ export default function Results() {
       <section className="review-section">
         <h2 className="section-title">Answer Review</h2>
         <div className="review-list">
-          {data.answers.map((a, i) => (
-            <div key={i} className={`review-item ${a.isCorrect ? 'good' : 'bad'}`}>
+          {data.answers.map((a, i) => {
+              const verdict = verdictOf(a);
+          return (
+            <div key={i} className={`review-item ${verdict}`}>
               <div className="review-header">
                 <span className="review-num">Q{i + 1}</span>
-                <span className={`review-verdict ${a.isCorrect ? 'good' : 'bad'}`}>
-                  {a.isCorrect ? <Check size={14} /> : <X size={14} />}
-                  {a.isCorrect ? 'Correct' : 'Wrong'}
+                <span className={`review-verdict ${verdict}`}>
+                  {verdict === 'good' ? <Check size={14} /> : verdict === 'partial' ? null : <X size={14} />}
+                  {verdict.toUpperCase()}
                 </span>
               </div>
               <p className="review-question">{a.question}</p>
-              <div className="review-answers">
-                <div className="review-row">
-                  <span className="review-label">Your answer</span>
-                  <span className={`review-value ${a.isCorrect ? 'good' : 'bad'}`}>{a.selected}</span>
-                </div>
-                {!a.isCorrect && (
-                  <div className="review-row">
-                    <span className="review-label">Correct answer</span>
-                    <span className="review-value good">{a.correct}</span>
+              {a.type === 'matching' && a.rows ? (
+                <div className="review-answers">
+                  {a.rows.map((r , j) =>(
+                  <div key={j} className = "review-row">
+                    <span className="review-label">{r.left}</span> 
+                    <span className={`review-value ${r.ok ? 'good': 'bad'}`}>
+                      {r.picked || '-'}
+                      {!r.ok && (
+                        <span className= "review-expected"> → {r.expected}</span>
+                      )}
+                    </span>
                   </div>
-                )}
-              </div>
+                    ))}
+                </div>
+              ) : (
+                <div className="review-answers">
+                  <div className="review-row">
+                    <span className="review-label">Your answer</span>
+                    <span className={`review-value ${verdict === 'good' ? 'good' : verdict === 'partial' ? 'partial' : 'bad'}`}>{a.selected}</span>
+                  </div>
+                  {verdict !== 'good' && (
+                    <div className="review-row">
+                      <span className="review-label">Correct answer</span>
+                      <span className="review-value good">{a.correct}</span>
+                    </div>
+                  )}
+                </div>
+              )}
               <div className={`explanation ${a.isCorrect ? 'correct' : 'wrong'}`}>
                 <p>{a.explanation}</p>
               </div>
             </div>
-          ))}
+          )})}
         </div>
       </section>
 
