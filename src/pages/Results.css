@@ -164,6 +164,12 @@
   background: rgba(248, 113, 113, 0.08);
 }
 
+.stat-pill.partial {
+  border-color: rgba(251, 191, 36, 0.4);
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.08);
+}
+
 .score-actions {
   display: flex;
   gap: 0.75rem;
@@ -279,6 +285,7 @@
 
 .review-verdict.good { color: #4ade80; }
 .review-verdict.bad { color: #f87171; }
+.review-verdict.partial { color: #fbbf24; }
 
 .review-question {
   font-size: 1rem;
@@ -323,6 +330,12 @@
 
 .review-value.good { color: #4ade80; }
 .review-value.bad { color: #f87171; }
+.review-value.partial { color: #fbbf24; }
+
+.review-expected {
+  color: #a3a3a3;
+  font-weight: 600;
+}
 
 .explanation {
   border: 1px solid #262626;
@@ -344,6 +357,12 @@
   background: rgba(74, 222, 128, 0.08);
   border-color: rgba(74, 222, 128, 0.3);
   border-left-color: #4ade80;
+}
+
+.explanation.partial {
+  background: rgba(251, 191, 36, 0.08);
+  border-color: rgba(251, 191, 36, 0.3);
+  border-left-color: #fbbf24;
 }
 
 .explanation.wrong {
