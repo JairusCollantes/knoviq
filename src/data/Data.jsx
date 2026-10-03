@@ -275,6 +275,42 @@ const rawAssignments = {
       { type: 'multiple_choice', question: 'What is lim(x→2) (x² - 4)/(x - 2)?', options: ['0', '2', '4', 'undefined'], answer: '4', explanation: 'Factor to (x-2)(x+2)/(x-2) = x+2 → 4 as x → 2.' },
       { type: 'multiple_choice', question: 'If lim(x→3⁻) f(x) = 5 and lim(x→3⁺) f(x) = 5, what is lim(x→3) f(x)?', options: ['Does not exist', '5', '10', 'Cannot be determined'], answer: '5', explanation: 'When both one-sided limits exist and are equal, the two-sided limit equals that value.' }
     ]
+  },
+  'calc-derivatives': {
+    topicId: 'calculus',
+    title: 'Derivatives',
+    difficulty: 'intermediate',
+    lesson: {
+      introduction: 'Derivatives measure instantaneous rates of change. If limits tell you where a function is heading, derivatives tell you how fast it is getting there — the slope of the tangent line at any point.',
+      concepts: [
+        {
+          title: 'The Derivative as a Slope',
+          explanation: 'The derivative f′(x) gives the slope of the tangent line to the graph of f at x. A positive derivative means the function is increasing; a negative one means it is decreasing.'
+        },
+        {
+          title: 'The Power Rule',
+          explanation: 'For f(x) = xⁿ, the derivative is f′(x) = n·xⁿ⁻¹. The derivative of any constant is 0, since a flat line has zero slope.'
+        },
+        {
+          title: 'Rules of Differentiation',
+          explanation: 'The product rule handles f·g, the quotient rule handles f/g, and the chain rule handles compositions like sin(x²). Each has a precise formula worth memorizing.'
+        },
+        {
+          title: 'Common Derivatives',
+          explanation: 'Memorize the basics: sin(x)→cos(x), cos(x)→−sin(x), eˣ→eˣ, ln(x)→1/x. Everything else is built from these plus the rules.'
+        }
+      ]
+    },
+    questions: [
+      { type: 'multiple_choice', question: 'What is the derivative of x²?', options: ['2x', 'x²', '2', '0'], answer: '2x', explanation: 'Power rule: d/dx[xⁿ] = n·xⁿ⁻¹, so d/dx[x²] = 2x.' },
+      { type: 'multiple_choice', question: 'What does f′(x) represent?', options: ['The slope of the tangent line', 'The area under the curve', 'The maximum value', 'The limit at infinity'], answer: 'The slope of the tangent line', explanation: 'The derivative at a point equals the slope of the tangent line there.' },
+      { type: 'multiple_choice', question: 'What is the derivative of a constant?', options: ['0', '1', 'The constant itself', 'Undefined'], answer: '0', explanation: 'A constant function graphs as a flat horizontal line, whose slope is 0.' },
+      { type: 'fill_blank', question: 'The derivative of sin(x) is ___.', answer: 'cos(x)', acceptedAnswers: ['cos(x)', 'cosx', 'cos x'], explanation: 'd/dx[sin(x)] = cos(x).' },
+      { type: 'fill_blank', question: 'If f(x) = 3x, then f′(x) = ___.', answer: '3', acceptedAnswers: ['3'], explanation: 'The 3 is a constant multiplier: d/dx[3x] = 3.' },
+      { type: 'fill_blank', question: 'The ___ rule is used to differentiate a product of two functions.', answer: 'product', acceptedAnswers: ['product', 'product rule'], explanation: 'The product rule states (fg)′ = f′g + fg′.' },
+      { type: 'matching', question: 'Match each function to its derivative.', pairs: [{ left: 'x²', right: '2x' }, { left: 'sin(x)', right: 'cos(x)' }, { left: 'cos(x)', right: '-sin(x)' }, { left: '5', right: '0' }], explanation: 'Apply the power rule and the memorized trig derivatives.' },
+      { type: 'matching', question: 'Match each notation to its meaning.', pairs: [{ left: "f'(x)", right: 'First derivative' }, { left: 'dy/dx', right: 'Leibniz notation' }, { left: "f''(x)", right: 'Second derivative' }, { left: 'd/dx', right: 'Differential operator' }], explanation: 'Prime notation is Lagrange; dy/dx is Leibniz; d/dx alone denotes the operator.' }
+    ]
   }
 };
 
@@ -376,27 +412,28 @@ export const demoAnswers = [
     explanation: '"this" refers to the current instance of the class.',
   },
   {
-    question: 'What is method overloading?',
-    options: ['Same name, different parameters', 'Same name, same parameters', 'Overriding a parent method', 'Calling a method recursively'],
-    selected: 'Overriding a parent method',
-    correct: 'Same name, different parameters',
-    isCorrect: false,
-    explanation: 'Overloading means multiple methods with the same name but different parameter lists.',
-  },
-  {
-    type : 'matching',
+    type: 'matching',
     question: 'Match each OOP pillar to its meaning.',
     selected: '3/4 pairs',
     correct: '4/4 pairs',
     credit: 0.75,
     isCorrect: false,
-    explanation: 'The four pillars are Encapsulation, Abstraction Inheritance and Polymorphism',
+    explanation: 'The four pillars are Encapsulation, Abstraction, Inheritance, and Polymorphism.',
     rows: [
-      { left : 'Encapsulation', picked: 'Bundling data and methods', expected: 'Bundling data and methods', ok: true},
-      { left : 'Inheritance', picked: 'Reusing parent behavior', expected: 'Reusing parent behavior', ok: true},
-      { left : 'Polymorphism', picked: 'Bundling data and methods', expected: 'Same interface, many forms', ok: false},
-      { left : 'Abstraction', picked: 'Hiding implementation details', expected: 'Hiding implementation details', ok: true},
-    ]
+      { left: 'Encapsulation', picked: 'Bundling data and methods', expected: 'Bundling data and methods', ok: true },
+      { left: 'Inheritance', picked: 'Reusing parent behavior', expected: 'Reusing parent behavior', ok: true },
+      { left: 'Polymorphism', picked: 'Hiding implementation details', expected: 'Same interface, many forms', ok: false },
+      { left: 'Abstraction', picked: 'Hiding implementation details', expected: 'Hiding implementation details', ok: true },
+    ],
+  },
+  {
+    type: 'fill_blank',
+    question: 'A class is a ___ for creating objects.',
+    selected: 'Blueprint',
+    correct: 'blueprint',
+    credit: 1,
+    isCorrect: true,
+    explanation: 'A class acts as a template or blueprint from which objects are created.',
   },
 ];
 
