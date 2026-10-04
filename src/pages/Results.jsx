@@ -3,18 +3,37 @@ import { ArrowLeft, Check, X, RotateCcw, LayoutDashboard, LibraryBig } from 'luc
 import { demoTopic, demoLessonMeta, demoResult } from '../data/Data';
 import './Results.css';
 
-function normalizedCredit(raw, isCorrect){
+function normalizeCredit(raw, isCorrect) {
   const n = Number(raw);
-  if (Number.isFinite(n))
-    return Math.min(1, Math.max(0, n));
+  if (Number.isFinite(n)) return Math.min(1, Math.max(0, n));
   return isCorrect ? 1 : 0;
+}
+
+function normalizeRows(raw) {
+  if (!Array.isArray(raw)) return null;
+  const rows = raw
+    .filter(Boolean)
+    .map((r) => ({
+      left: String(r.left ?? ''),
+      picked: String(r.picked ?? ''),
+      expected: String(r.expected ?? ''),
+      ok: Boolean(r.ok),
+    }));
+  return rows.length === 0 ? null : rows;
 }
 
 function verdictOf(answer) {
   const credit = answer.credit ?? (answer.isCorrect ? 1 : 0);
   if (credit === 1) return 'good';
-  if (credit > 0) return 'partial'; 
+  if (credit > 0) return 'partial';
   return 'bad';
+}
+
+function verdictLabel(answer) {
+  const v = verdictOf(answer);
+  if (v === 'good') return 'Correct';
+  if (v === 'partial') return 'Partial';
+  return 'Wrong';
 }
 
 function normalizeAttempt(raw) {
@@ -24,21 +43,17 @@ function normalizeAttempt(raw) {
     .map((a) => {
       const isCorrect = Boolean(a.isCorrect);
       return {
-          question: String(a.question ?? 'Untitled question'),
-          type: String(a.type ?? 'multiple_choice'),
-          selected: String(a.selected ?? '—'),
-          correct: String(a.correct ?? '—'),
-          credit : normalizedCredit(a.credit, isCorrect),
-          isCorrect,
-          explanation: String(a.explanation ?? ''),
-      }
-      // question: String(a.question ?? 'Untitled question'),
-      // selected: a.selected ?? '—',
-      // correct: a.correct ?? '—',
-      // isCorrect: Boolean(a.isCorrect),
-      // explanation: String(a.explanation ?? ''),
-    }
-  );
+        question: String(a.question ?? 'Untitled question'),
+        type: String(a.type ?? 'multiple_choice'),
+        selected: String(a.selected ?? '—'),
+        correct: String(a.correct ?? '—'),
+        credit: normalizeCredit(a.credit, isCorrect),
+        isCorrect,
+        explanation: String(a.explanation ?? ''),
+        options: Array.isArray(a.options) ? a.options.map(String) : null,
+        rows: normalizeRows(a.rows),
+      };
+    });
   if (answers.length === 0) return null;
   return {
     id: String(raw.id ?? 'attempt-unknown'),
@@ -113,8 +128,12 @@ export default function Results() {
   }
 
   const total = data.answers.length;
-  const correctCount = data.answers.filter((a) => a.isCorrect).length;
-  const pct = total === 0 ? 0 : Math.round((correctCount / total) * 100);
+  const creditOf = (a) => (Number.isFinite(a.credit) ? a.credit : (a.isCorrect ? 1 : 0));
+  const totalCredit = data.answers.reduce((sum, a) => sum + creditOf(a), 0);
+  const correctCount = data.answers.filter((a) => creditOf(a) === 1).length;
+  const partialCount = data.answers.filter((a) => creditOf(a) > 0 && creditOf(a) < 1).length;
+  const wrongCount = total - correctCount - partialCount;
+  const pct = total === 0 ? 0 : Math.round((totalCredit / total) * 100);
   const accent = data.topicColor || demoTopic.color;
 
   return (
@@ -160,8 +179,13 @@ export default function Results() {
               <span className="stat-pill good">
                 <Check size={14} /> {correctCount} correct
               </span>
+              {partialCount > 0 && (
+                <span className="stat-pill partial">
+                  {partialCount} partial
+                </span>
+              )}
               <span className="stat-pill bad">
-                <X size={14} /> {total - correctCount} wrong
+                <X size={14} /> {wrongCount} wrong
               </span>
             </div>
           </div>
@@ -188,30 +212,30 @@ export default function Results() {
         <h2 className="section-title">Answer Review</h2>
         <div className="review-list">
           {data.answers.map((a, i) => {
-              const verdict = verdictOf(a);
-          return (
+            const verdict = verdictOf(a);
+            return (
             <div key={i} className={`review-item ${verdict}`}>
               <div className="review-header">
                 <span className="review-num">Q{i + 1}</span>
                 <span className={`review-verdict ${verdict}`}>
                   {verdict === 'good' ? <Check size={14} /> : verdict === 'partial' ? null : <X size={14} />}
-                  {verdict.toUpperCase()}
+                  {verdictLabel(a)}
                 </span>
               </div>
               <p className="review-question">{a.question}</p>
               {a.type === 'matching' && a.rows ? (
                 <div className="review-answers">
-                  {a.rows.map((r , j) =>(
-                  <div key={j} className = "review-row">
-                    <span className="review-label">{r.left}</span> 
-                    <span className={`review-value ${r.ok ? 'good': 'bad'}`}>
-                      {r.picked || '-'}
-                      {!r.ok && (
-                        <span className= "review-expected"> → {r.expected}</span>
-                      )}
-                    </span>
-                  </div>
-                    ))}
+                  {a.rows.map((r, j) => (
+                    <div key={j} className="review-row">
+                      <span className="review-label">{r.left}</span>
+                      <span className={`review-value ${r.ok ? 'good' : 'bad'}`}>
+                        {r.picked || '—'}
+                        {!r.ok && (
+                          <span className="review-expected"> → {r.expected}</span>
+                        )}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               ) : (
                 <div className="review-answers">
@@ -227,11 +251,12 @@ export default function Results() {
                   )}
                 </div>
               )}
-              <div className={`explanation ${a.isCorrect ? 'correct' : 'wrong'}`}>
+              <div className={`explanation ${verdict === 'good' ? 'correct' : verdict === 'partial' ? 'partial' : 'wrong'}`}>
                 <p>{a.explanation}</p>
               </div>
             </div>
-          )})}
+            );
+          })}
         </div>
       </section>
 
