@@ -155,7 +155,6 @@ export default function Learn() {
         >
           <div className="question-number">Question {currentQ + 1}</div>
           <h2 className="question-text">{q.question}</h2>
-
           <div className="options-list">
             {q.options.map((opt, i) => {
               let cls = 'option-btn';
@@ -165,7 +164,6 @@ export default function Learn() {
               } else if (opt === selected) {
                 cls += ' selected';
               }
-
               return (
                 <button
                   key={i}
