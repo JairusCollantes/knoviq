@@ -3,20 +3,25 @@ import { cn } from "@/lib/utils";
 
 export function DotBackgroundDemo({ children }) {
   return (
-    <div className="relative min-h-screen w-full bg-black dark:bg-black">
+    <div className="relative min-h-screen w-full bg-[var(--bg)]">
       {/* The dot pattern */}
       <div
+        aria-hidden="true"
         className={cn(
           "absolute inset-0",
           "[background-size:24px_24px]",
-          "[background-image:radial-gradient(#a1a1aa_1.5px,transparent_1.5px)]",
-          "dark:[background-image:radial-gradient(#525252_1.5px,transparent_1.5px)]"
-        )} 
+          "[background-image:radial-gradient(#3d3745_1.4px,transparent_1.4px)]"
+        )}
       />
-      
-      {/* The faded look mask */}
+
+      {/* Ambient rose glow + faded mask to break flatness */}
       <div
-        className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_10%,black_70%)] dark:bg-black"
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[var(--bg)] [mask-image:radial-gradient(ellipse_75%_60%_at_50%_0%,transparent_15%,black_75%)]"
+      ></div>
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[420px] [background:radial-gradient(52%_60%_at_50%_0%,color-mix(in_srgb,var(--accent)_13%,transparent),transparent_70%)]"
       ></div>
       
       {/* Your page content goes here */}

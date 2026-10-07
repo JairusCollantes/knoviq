@@ -9,7 +9,7 @@
   flex-shrink: 0;
   width: 100%;
   box-sizing: border-box;
-  background: #0a0a0a;
+  background: var(--surface-2);
   border-bottom: 1px solid #262626;
   position: sticky;
   top: 0;
@@ -64,7 +64,7 @@
 
 .nav-link:hover {
   color: #fff;
-  background: #1a1a1a;
+  background: var(--surface-3);
   border-color: #262626;
 }
 
