@@ -26,7 +26,7 @@ export default function Dashboard() {
               <div className="continue-card-top">
                 <span
                   className="topic-badge"
-                  style={{ background: topicColor + '22', color: topicColor }}
+                  style={{ background: `color-mix(in srgb, ${topicColor} 14%, transparent)`, color: topicColor }}
                 >
                   <continueLearning.icon />
                   {continueLearning.badge}
@@ -88,7 +88,7 @@ export default function Dashboard() {
                   key={t.id}
                   to="/library"
                   className="topic-chip"
-                  style={{ borderColor: t.color + '44' }}
+                  style={{ borderColor: `color-mix(in srgb, ${t.color} 30%, transparent)` }}
                 >
                   <span className="topic-chip-icon" style={{ color: t.color }}>
                     <t.icon />
