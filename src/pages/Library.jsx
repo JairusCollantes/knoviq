@@ -69,7 +69,7 @@ export default function Library() {
                     <span className="lib-lesson-title">{l.title}</span>
                     <span
                       className="lib-difficulty"
-                      style={{ background: t.color + '22', color: t.color }}
+                      style={{ background: `color-mix(in srgb, ${t.color} 14%, transparent)`, color: t.color }}
                     >
                       {l.difficulty}
                     </span>

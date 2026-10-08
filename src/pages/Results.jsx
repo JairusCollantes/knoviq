@@ -151,13 +151,13 @@ export default function Results() {
 
       <section className="score-card">
         <div className="score-top">
-          <span className="learn-topic-badge" style={{ background: accent + '22', color: accent }}>
+          <span className="learn-topic-badge" style={{ background: `color-mix(in srgb, ${accent} 14%, transparent)`, color: accent }}>
             <span className="badge-icon" style={{ color: accent }}>
               <demoTopic.icon size={14} />
             </span>
             {data.topicName}
           </span>
-          <span className="difficulty-badge" style={{ background: accent + '22', color: accent }}>
+          <span className="difficulty-badge" style={{ background: `color-mix(in srgb, ${accent} 14%, transparent)`, color: accent }}>
             {data.difficulty}
           </span>
         </div>
@@ -165,7 +165,7 @@ export default function Results() {
         <h2 className="score-title">{data.lessonTitle}</h2>
 
         <div className="score-main">
-          <div className="score-number" style={{ borderColor: accent + '55' }}>
+          <div className="score-number" style={{ borderColor: `color-mix(in srgb, ${accent} 36%, transparent)` }}>
             <span className="score-pct">{pct}%</span>
             <span className="score-fraction">
               {correctCount}/{total} correct

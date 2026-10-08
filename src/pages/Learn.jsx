@@ -28,6 +28,8 @@ function mulberry32(seed) {
   };
 }
 
+/* Deterministic shuffle (seeded by question text) so the right-hand options
+   stay stable across re-renders but differ per question. */
 function shuffledPairRights(question) {
   const rights = question.pairs.map((p) => p.right);
   const rand = mulberry32(hashString(question.question));
@@ -38,6 +40,8 @@ function shuffledPairRights(question) {
   return rights;
 }
 
+/* Grades any question type. Returns credit in [0, 1] plus per-row detail
+   for matching questions (used by the Results review). */
 function gradeQuestion(question, selected, matchMap) {
   if (question.type === 'matching') {
     const total = question.pairs.length;
@@ -159,7 +163,7 @@ export default function Learn() {
       try {
         localStorage.setItem(attemptId, JSON.stringify(attemptData));
       } catch {
-        //nothing
+        // private-mode/quota: still navigate with state backup below
       }
       navigate(`/results/${attemptId}`, { state: { attempt: attemptData } });
     } else {
@@ -266,7 +270,7 @@ export default function Learn() {
           Back
         </button>
         <div className="learn-topbar-info">
-          <span className="learn-topic-badge" style={{ background: topic.color + '22', color: topic.color }}>
+          <span className="learn-topic-badge" style={{ background: `color-mix(in srgb, ${topic.color} 14%, transparent)`, color: topic.color }}>
             <span className="badge-icon" style={{ color: topic.color }}><topic.icon size={14}/></span>
             {topic.name}
           </span>
@@ -285,7 +289,7 @@ export default function Learn() {
         <div className="study-card">
           <div className="study-header">
             <h1 className="study-title">{assignment.title}</h1>
-            <span className="difficulty-badge" style={{ background: topic.color + '22', color: topic.color }}>
+            <span className="difficulty-badge" style={{ background: `color-mix(in srgb, ${topic.color} 14%, transparent)`, color: topic.color }}>
               {assignment.difficulty}
             </span>
           </div>

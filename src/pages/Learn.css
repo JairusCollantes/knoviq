@@ -19,7 +19,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: #111111;
+  background: var(--surface);
   border: 1px solid #262626;
   color: #a3a3a3;
   font-family: inherit;
@@ -100,7 +100,7 @@
 }
 
 .study-card {
-  background: #111111;
+  background: var(--surface);
   border: 1px solid #262626;
   border-radius: 24px;
   padding: 2rem;
@@ -160,7 +160,7 @@
 }
 
 .concept-item {
-  background: #0a0a0a;
+  background: var(--surface-2);
   border: 1px solid #262626;
   border-radius: 16px;
   overflow: hidden;
@@ -170,12 +170,12 @@
 
 .concept-item:hover {
   border-color: #333333;
-  background: #111111;
+  background: var(--surface);
 }
 
 .concept-item.expanded {
   border-color: rgba(255, 46, 136, 0.4);
-  background: #111111;
+  background: var(--surface);
 }
 
 .concept-header {
@@ -259,7 +259,7 @@
 }
 
 .question-card {
-  background: #111111;
+  background: var(--surface);
   border: 1px solid #262626;
   border-radius: 24px;
   padding: 2rem;
@@ -275,7 +275,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: #d4d4d4;
-  background: #1a1a1a;
+  background: var(--surface-3);
   border: 1px solid #262626;
   padding: 0.35rem 0.75rem;
   border-radius: 20px;
@@ -301,7 +301,7 @@
 .blank-input {
   width: 100%;
   padding: 0.95rem 1.1rem;
-  background: #100b18;
+  background: var(--surface-2);
   border: 1px solid #262626;
   border-radius: 16px;
   color: #f5f5f5;
@@ -319,7 +319,7 @@
 
 .blank-input:not(:disabled):focus {
   border-color: var(--accent, #ff2e88);
-  background: #1a1a1a;
+  background: var(--surface-3);
 }
 
 .blank-input.correct {
@@ -351,7 +351,7 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.7rem 0.9rem;
-  background: #100b18;
+  background: var(--surface-2);
   border: 1px solid #262626;
   border-radius: 16px;
   animation: optionIn 0.35s ease backwards;
@@ -387,7 +387,7 @@
   flex: 1;
   min-width: 0;
   padding: 0.6rem 0.75rem;
-  background: #1a1a1a;
+  background: var(--surface-3);
   border: 1px solid #262626;
   border-radius: 12px;
   color: #d4d4d4;
@@ -419,7 +419,7 @@
 
 .answer-reveal {
   border: 1px solid #262626;
-  background: #100b18;
+  background: var(--surface-2);
   border-radius: 16px;
   padding: 0.85rem 1.1rem;
   margin-bottom: 1rem;
@@ -447,7 +447,7 @@
   gap: 0.85rem;
   width: 100%;
   padding: 0.95rem 1.1rem;
-  background: #0a0a0a;
+  background: var(--surface-2);
   border: 1px solid #262626;
   border-radius: 16px;
   color: #d4d4d4;
@@ -472,7 +472,7 @@
 .option-btn:nth-child(6) { animation-delay: 0.24s; }
 
 .option-btn:not(:disabled):hover {
-  background: #1a1a1a;
+  background: var(--surface-3);
   border-color: rgba(255, 46, 136, 0.4);
   color: #fff;
   transform: translateX(3px);
@@ -485,7 +485,7 @@
   width: 28px;
   height: 28px;
   border-radius: 10px;
-  background: #1a1a1a;
+  background: var(--surface-3);
   border: 1px solid #262626;
   color: #a3a3a3;
   font-size: 0.78rem;
@@ -551,7 +551,7 @@
 .explanation {
   border: 1px solid #262626;
   border-left: 3px solid;
-  background: #0a0a0a;
+  background: var(--surface-2);
   border-radius: 16px;
   padding: 1rem 1.15rem;
   margin-bottom: 1.5rem;

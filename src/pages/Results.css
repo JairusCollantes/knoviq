@@ -25,7 +25,7 @@
 }
 
 .score-card {
-  background: #111111;
+  background: var(--surface);
   border: 1px solid #262626;
   border-radius: 24px;
   padding: 2rem;
@@ -96,7 +96,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.15rem;
-  background: #0a0a0a;
+  background: var(--surface-2);
 }
 
 .score-pct {
@@ -148,7 +148,7 @@
   padding: 0.35rem 0.75rem;
   border-radius: 20px;
   border: 1px solid #262626;
-  background: #0a0a0a;
+  background: var(--surface-2);
   color: #d4d4d4;
 }
 
@@ -204,7 +204,7 @@
   justify-content: center;
   gap: 0.4rem;
   padding: 1rem 1.1rem;
-  background: #0a0a0a;
+  background: var(--surface-2);
   border: 1px solid #262626;
   border-radius: 16px;
   color: #a3a3a3;
@@ -243,7 +243,7 @@
 }
 
 .review-item {
-  background: #111111;
+  background: var(--surface);
   border: 1px solid #262626;
   border-radius: 20px;
   padding: 1.25rem 1.35rem;
@@ -269,7 +269,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: #d4d4d4;
-  background: #1a1a1a;
+  background: var(--surface-3);
   border: 1px solid #262626;
   padding: 0.35rem 0.75rem;
   border-radius: 20px;
@@ -306,7 +306,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  background: #0a0a0a;
+  background: var(--surface-2);
   border: 1px solid #262626;
   border-radius: 12px;
   padding: 0.65rem 0.85rem;
@@ -340,7 +340,7 @@
 .explanation {
   border: 1px solid #262626;
   border-left: 3px solid;
-  background: #0a0a0a;
+  background: var(--surface-2);
   border-radius: 16px;
   padding: 1rem 1.15rem;
   font-size: 0.88rem;
@@ -375,7 +375,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: #111111;
+  background: var(--surface);
   border: 1px solid #262626;
   color: #a3a3a3;
   font-family: inherit;
@@ -409,7 +409,7 @@
 }
 
 .not-found-card {
-  background: #111111;
+  background: var(--surface);
   border: 1px solid #262626;
   border-radius: 24px;
   padding: 2rem;
