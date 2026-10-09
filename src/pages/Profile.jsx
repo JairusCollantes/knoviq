@@ -20,7 +20,12 @@ export default function Profile() {
           <p className="profile-bio">{user.bio}</p>
           <span className="profile-joined">Joined {user.joined}</span>
         </div>
-        <button className="edit-btn" type="button">
+        <button
+          className="edit-btn"
+          type="button"
+          disabled
+          title="Profile editing is coming soon"
+        >
           Edit
         </button>
       </section>
@@ -48,9 +53,17 @@ export default function Profile() {
               </span>
               <span className="prof-mastery-name">{m.topic.name}</span>
               <div className="prof-mastery-progress">
-                <div className="prof-mastery-bar">
+                <div
+                  className="prof-mastery-bar"
+                  role="progressbar"
+                  aria-valuenow={m.avgPct}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-label={`${m.topic.name} mastery`}
+                >
                   <div
                     className="prof-mastery-fill"
+                    aria-hidden="true"
                     style={{ width: `${m.avgPct}%`, background: m.topic.color }}
                   />
                 </div>
@@ -80,9 +93,17 @@ export default function Profile() {
                   {l.difficulty}
                 </span>
                 <div className="lib-lesson-progress">
-                  <div className="lib-mini-bar">
+                  <div
+                    className="lib-mini-bar"
+                    role="progressbar"
+                    aria-valuenow={pct}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    aria-label={`${l.title} progress`}
+                  >
                     <div
                       className="lib-mini-fill"
+                      aria-hidden="true"
                       style={{ width: `${pct}%`, background: t.color }}
                     />
                   </div>

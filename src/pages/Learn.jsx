@@ -8,6 +8,15 @@ function normalizeBlank(value) {
   return String(value ?? '').trim().toLowerCase().replace(/\s+/g, ' ');
 }
 
+function persistAttempt(attemptId, attemptData) {
+  try {
+    localStorage.setItem(attemptId, JSON.stringify(attemptData));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 function hashString(s) {
   let h = 2166136261;
   for (let i = 0; i < s.length; i++) {
@@ -28,8 +37,6 @@ function mulberry32(seed) {
   };
 }
 
-/* Deterministic shuffle (seeded by question text) so the right-hand options
-   stay stable across re-renders but differ per question. */
 function shuffledPairRights(question) {
   const rights = question.pairs.map((p) => p.right);
   const rand = mulberry32(hashString(question.question));
@@ -40,8 +47,6 @@ function shuffledPairRights(question) {
   return rights;
 }
 
-/* Grades any question type. Returns credit in [0, 1] plus per-row detail
-   for matching questions (used by the Results review). */
 function gradeQuestion(question, selected, matchMap) {
   if (question.type === 'matching') {
     const total = question.pairs.length;
@@ -160,11 +165,7 @@ export default function Learn() {
         answers: finalAnswers,
         timestamp: new Date().toISOString(),
       };
-      try {
-        localStorage.setItem(attemptId, JSON.stringify(attemptData));
-      } catch {
-        // private-mode/quota: still navigate with state backup below
-      }
+      persistAttempt(attemptId, attemptData);
       navigate(`/results/${attemptId}`, { state: { attempt: attemptData } });
     } else {
       setCurrentQ((c) => c + 1);
@@ -257,10 +258,10 @@ export default function Learn() {
 
   const verdictClass = isCorrect ? 'correct' : isPartial ? 'partial' : 'wrong';
   const verdictText = isCorrect
-    ? '🎉 Correct!'
+    ? 'Correct'
     : isPartial
-      ? `⚡ Partially correct! (${grade.rows.filter((r) => r.ok).length}/${q.pairs.length} pairs)`
-      : '❌ Not quite.';
+      ? `Partially correct (${grade.rows.filter((r) => r.ok).length}/${q.pairs.length} pairs)`
+      : 'Not quite';
 
   return (
     <div className="learn-page">
@@ -281,8 +282,15 @@ export default function Learn() {
         </span>
       </div>
 
-      <div className="learn-progress-track">
-        <div className="learn-progress-fill" style={{ width: `${progressPct}%`, background: topic.color }} />
+      <div
+        className="learn-progress-track"
+        role="progressbar"
+        aria-valuenow={Math.round(progressPct)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label="Lesson progress"
+      >
+        <div className="learn-progress-fill" aria-hidden="true" style={{ width: `${progressPct}%`, background: topic.color }} />
       </div>
 
       {phase === 'study' && (
@@ -301,15 +309,23 @@ export default function Learn() {
               <div
                 key={i}
                 className={`concept-item ${expandedConcept === i ? 'expanded' : ''}`}
-                onClick={() => setExpandedConcept(expandedConcept === i ? -1 : i)}
                 >
-                <div className="concept-header">
+                <button
+                  type="button"
+                  className="concept-header"
+                  aria-expanded={expandedConcept === i}
+                  aria-controls={`concept-body-${i}`}
+                  onClick={() => setExpandedConcept(expandedConcept === i ? -1 : i)}
+                >
                     <span className="concept-bullet" style={{ background: topic.color }}></span>
                     <span className="concept-title">{concept.title}</span>
-                    {expandedConcept === i ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-                </div>
+                    {expandedConcept === i ? <ChevronUp size={18} aria-hidden="true" /> : <ChevronDown size={18} aria-hidden="true" />}
+                </button>
 
-                <div className={`concept-body ${expandedConcept === i ? 'open' : ''}`}>
+                <div
+                  id={`concept-body-${i}`}
+                  className={`concept-body ${expandedConcept === i ? 'open' : ''}`}
+                >
                     <div className="concept-body-inner">
                     <p className="concept-explanation">{concept.explanation}</p>
                     </div>
@@ -346,7 +362,7 @@ export default function Learn() {
           )}
 
           {checked && (
-            <div className={`explanation ${verdictClass}`}>
+            <div className={`explanation ${verdictClass}`} role="status">
               <strong>{verdictText}</strong>
               <p>{q.explanation}</p>
             </div>

@@ -1,5 +1,6 @@
 import {
-  CodeXml,
+  Coffee,
+  Cpu,
   SquareFunction,
   Target,
   Flame,
@@ -8,8 +9,8 @@ import {
 } from 'lucide-react';
 
 export const topics = [
-  { id: 'java', name: 'Java', color: '#5f9de8', icon: CodeXml },
-  { id: 'cpp', name: 'C++', color: '#cfa32e', icon: CodeXml },
+  { id: 'java', name: 'Java', color: '#5f9de8', icon: Coffee },
+  { id: 'cpp', name: 'C++', color: '#cfa32e', icon: Cpu },
   { id: 'calculus', name: 'Calculus', color: '#d36557', icon: SquareFunction },
 ];
 
@@ -25,7 +26,7 @@ export const continueLearning = {
   pct: 50,
   completed: 5,
   total: 10,
-  icon: CodeXml,
+  icon: Coffee,
 };
 
 export const recentActivity = [
@@ -43,7 +44,6 @@ export const lessons = [
   { id: 'calc-derivatives', topicId: 'calculus', title: 'Derivatives', difficulty: 'intermediate', progress: 0, total: 8 },
 ];
 
-/* Dashboard "Up Next" queue: least-complete lessons first. */
 export function upNextLessons(count = 3) {
   return lessons
     .filter((l) => l.progress < l.total)
@@ -52,7 +52,6 @@ export function upNextLessons(count = 3) {
     .slice(0, count);
 }
 
-/* Profile "Topic Mastery": aggregate progress per topic. */
 export function topicMastery() {
   return topics.map((t) => {
     const topicLessons = lessons.filter((l) => l.topicId === t.id);
@@ -316,8 +315,6 @@ const rawAssignments = {
   }
 };
 
-/* Derive each assignment's topic from shared `topics` so names, colors and
-   icons can never drift out of sync across pages. */
 function withSharedTopic(assignment) {
   const t = topicById(assignment.topicId);
   return { ...assignment, topic: { name: t.name, color: t.color, icon: t.icon } };

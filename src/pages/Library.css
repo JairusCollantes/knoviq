@@ -155,7 +155,7 @@
   background: var(--surface-3);
   border: 1px solid #262626;
   padding: 0.28rem 0.65rem;
-  border-radius: 20px;
+  border-radius: 7px;
 }
 
 .lib-lesson-list {
@@ -198,7 +198,7 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   padding: 0.22rem 0.55rem;
-  border-radius: 20px;
+  border-radius: 7px;
   border: 1px solid #262626;
   flex-shrink: 0;
 }
@@ -359,7 +359,6 @@
     align-items: flex-start;
   }
 
-  /* Let long lesson titles wrap instead of truncating */
   .lib-lesson-title {
     white-space: normal;
     overflow: visible;
@@ -368,7 +367,12 @@
   }
 
   .lib-lesson-progress {
-    display: none;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+
+  .lib-mini-bar {
+    min-width: 40px;
   }
 
   .generate-btn {

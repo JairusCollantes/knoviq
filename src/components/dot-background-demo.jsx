@@ -1,10 +1,8 @@
-// src/components/dot-background-demo.jsx
 import { cn } from "@/lib/utils";
 
 export function DotBackgroundDemo({ children }) {
   return (
     <div className="relative min-h-screen w-full bg-[var(--bg)]">
-      {/* The dot pattern */}
       <div
         aria-hidden="true"
         className={cn(
@@ -14,7 +12,6 @@ export function DotBackgroundDemo({ children }) {
         )}
       />
 
-      {/* Ambient rose glow + faded mask to break flatness */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[var(--bg)] [mask-image:radial-gradient(ellipse_75%_60%_at_50%_0%,transparent_15%,black_75%)]"
@@ -24,7 +21,6 @@ export function DotBackgroundDemo({ children }) {
         className="pointer-events-none absolute inset-x-0 top-0 h-[420px] [background:radial-gradient(52%_60%_at_50%_0%,color-mix(in_srgb,var(--accent)_13%,transparent),transparent_70%)]"
       ></div>
       
-      {/* Your page content goes here */}
       <div className="relative z-20 w-full">
         {children}
       </div>

@@ -165,19 +165,34 @@ export default function Results() {
         <h2 className="score-title">{data.lessonTitle}</h2>
 
         <div className="score-main">
-          <div className="score-number" style={{ borderColor: `color-mix(in srgb, ${accent} 36%, transparent)` }}>
+          <div
+            className="score-number"
+            role="progressbar"
+            aria-valuenow={pct}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-label={`Score ${pct} percent, ${correctCount} of ${total} correct`}
+            style={{ borderColor: `color-mix(in srgb, ${accent} 36%, transparent)` }}
+          >
             <span className="score-pct">{pct}%</span>
             <span className="score-fraction">
               {correctCount}/{total} correct
             </span>
           </div>
           <div className="score-bars">
-            <div className="progress-bar-track">
-              <div className="progress-bar-fill" style={{ width: `${pct}%`, background: accent }} />
+            <div
+              className="progress-bar-track"
+              role="progressbar"
+              aria-valuenow={pct}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-label="Score progress"
+            >
+              <div className="progress-bar-fill" aria-hidden="true" style={{ width: `${pct}%`, background: accent }} />
             </div>
             <div className="score-stats">
               <span className="stat-pill good">
-                <Check size={14} /> {correctCount} correct
+                <Check size={14} aria-hidden="true" /> {correctCount} correct
               </span>
               {partialCount > 0 && (
                 <span className="stat-pill partial">
@@ -185,7 +200,7 @@ export default function Results() {
                 </span>
               )}
               <span className="stat-pill bad">
-                <X size={14} /> {wrongCount} wrong
+                <X size={14} aria-hidden="true" /> {wrongCount} wrong
               </span>
             </div>
           </div>
@@ -210,15 +225,16 @@ export default function Results() {
 
       <section className="review-section">
         <h2 className="section-title">Answer Review</h2>
-        <div className="review-list">
+        <ol className="review-list">
           {data.answers.map((a, i) => {
             const verdict = verdictOf(a);
             return (
-            <div key={i} className={`review-item ${verdict}`}>
+            <li key={i} className={`review-item ${verdict}`}>
+            <article aria-label={`Question ${i + 1}: ${verdictLabel(a)}`}>
               <div className="review-header">
                 <span className="review-num">Q{i + 1}</span>
                 <span className={`review-verdict ${verdict}`}>
-                  {verdict === 'good' ? <Check size={14} /> : verdict === 'partial' ? null : <X size={14} />}
+                  {verdict === 'good' ? <Check size={14} aria-hidden="true" /> : verdict === 'partial' ? null : <X size={14} aria-hidden="true" />}
                   {verdictLabel(a)}
                 </span>
               </div>
@@ -254,10 +270,11 @@ export default function Results() {
               <div className={`explanation ${verdict === 'good' ? 'correct' : verdict === 'partial' ? 'partial' : 'wrong'}`}>
                 <p>{a.explanation}</p>
               </div>
-            </div>
+            </article>
+            </li>
             );
           })}
-        </div>
+        </ol>
       </section>
 
       <button className="back-btn res-back" onClick={() => navigate('/library')}>

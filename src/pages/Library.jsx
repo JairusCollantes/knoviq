@@ -23,11 +23,16 @@ export default function Library() {
         <p className="lib-subtitle">Browse, search, and generate new lessons.</p>
       </header>
 
-      <div className="search-wrap">
-        <Search size={16} className="search-icon" />
+      <div className="search-wrap" role="search">
+        <Search size={16} className="search-icon" aria-hidden="true" />
+        <label htmlFor="lesson-search" className="visually-hidden">
+          Search lessons
+        </label>
         <input
-          type="text"
+          id="lesson-search"
+          type="search"
           placeholder="Search lessons..."
+          aria-label="Search lessons"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="search-input"
@@ -74,9 +79,17 @@ export default function Library() {
                       {l.difficulty}
                     </span>
                     <div className="lib-lesson-progress">
-                      <div className="lib-mini-bar">
+                      <div
+                        className="lib-mini-bar"
+                        role="progressbar"
+                        aria-valuenow={pct}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                        aria-label={`${l.title} progress`}
+                      >
                         <div
                           className="lib-mini-fill"
+                          aria-hidden="true"
                           style={{ width: `${pct}%`, background: t.color }}
                         />
                       </div>
@@ -98,8 +111,13 @@ export default function Library() {
         )}
       </div>
 
-      <button className="generate-btn">
-        <Plus size={16} />
+      <button
+        type="button"
+        className="generate-btn"
+        disabled
+        title="Lesson generation is coming soon"
+      >
+        <Plus size={16} aria-hidden="true" />
         Generate Lesson
       </button>
     </div>
