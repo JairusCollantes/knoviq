@@ -6,21 +6,31 @@ import Learn from './pages/Learn';
 import Library from './pages/Library';
 import Results from './pages/Results';
 import Profile from './pages/Profile';
+import NotFound from './pages/NotFound';
 
 export default function App() {
   return (
     <BrowserRouter>
       <DotBackgroundDemo >
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/learn/:lessonId" element={<Learn />} />
-        <Route path="/library" element={<Library />} />
-        <Route path="/results" element={<Results />} />
-        <Route path="/results/:attemptId" element={<Results />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
+      <main id="main-content">
+        <Routes>
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/learn/:lessonId" element={<Learn />} />
+          <Route path="/library" element={<Library />} />
+          <Route path="/results" element={<Results />} />
+          <Route path="/results/:attemptId" element={<Results />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+      <footer className="site-footer">
+        <span>Knoviq — study at your own pace.</span>
+      </footer>
       </DotBackgroundDemo>
     </BrowserRouter>
   );
