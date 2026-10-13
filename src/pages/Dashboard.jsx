@@ -55,7 +55,6 @@ export default function Dashboard() {
                   style={{ width: `${continueLearning.pct}%`, background: topicColor }}
                 />
               </div>
-
               <div className="continue-meta">
                 <span>{continueLearning.completed}/{continueLearning.total} completed</span>
                 <span className="continue-btn">Continue →</span>
