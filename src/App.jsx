@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import { DotBackgroundDemo } from './components/dot-background-demo';
+import { AuthProvider } from './context/AuthContext';
 import Dashboard from './pages/Dashboard';
 import Learn from './pages/Learn';
 import Library from './pages/Library';
@@ -12,6 +13,7 @@ import NotFound from './pages/NotFound';
 export default function App() {
   return (
     <BrowserRouter>
+      <AuthProvider>
       <DotBackgroundDemo >
       <a className="skip-link" href="#main-content">
         Skip to content
@@ -34,6 +36,7 @@ export default function App() {
         <span>Knoviq — study at your own pace.</span>
       </footer>
       </DotBackgroundDemo>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
