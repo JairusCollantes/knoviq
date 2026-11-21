@@ -6,6 +6,7 @@ import Learn from './pages/Learn';
 import Library from './pages/Library';
 import Results from './pages/Results';
 import Profile from './pages/Profile';
+import Login from './pages/Login';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="/results" element={<Results />} />
           <Route path="/results/:attemptId" element={<Results />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
