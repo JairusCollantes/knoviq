@@ -15,7 +15,7 @@ export default function Login() {
   async function submit(e) {
     e.preventDefault();
     setError('');
-    if (!supabase) { setError('Supabase not configured. Set VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY.'); return; }
+    if (!supabase) { setError('Supabase not configured. Set VITE_SUPABASE_URL / VITE_SUPABASE_PUBLISHABLE_KEY.'); return; }
     setBusy(true);
     try {
       const fn = mode === 'signup' ? supabase.auth.signUp({ email, password }) : supabase.auth.signInWithPassword({ email, password });
@@ -33,7 +33,7 @@ export default function Login() {
     <div className="library">
       <header className="lib-header">
         <h1>Login</h1>
-        <p className="lib-subtitle">Sign in to save attempts, generate lessons with Groq (qwen3.8), and track mastery.</p>
+        <p className="lib-subtitle">Sign in to save attempts, generate lessons with Rora, and track mastery.</p>
       </header>
       {!configured && <div className="lib-empty">Supabase env missing — login disabled until VITE_SUPABASE_URL is set. Static demo data still works.</div>}
       <form onSubmit={submit} style={{ display: 'grid', gap: '0.75rem', marginTop: '1rem' }}>
