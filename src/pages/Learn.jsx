@@ -89,7 +89,7 @@ export default function Learn() {
   const [expandedConcept, setExpandedConcept] = useState(0);
 
   useEffect(() => {
-    if (!assignment) navigate('/dashboard');
+    if (!assignment) navigate('/library');
   }, [assignment, navigate]);
 
   const totalQ = assignment ? assignment.questions.length : 0;

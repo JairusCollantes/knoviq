@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
-import { ArrowLeft, Check, X, RotateCcw, LayoutDashboard, LibraryBig } from 'lucide-react';
+import { ArrowLeft, Check, X, RotateCcw, LibraryBig } from 'lucide-react';
 import { demoTopic, demoLessonMeta, demoResult } from '../data/Data';
 import './Results.css';
 
@@ -114,9 +114,6 @@ export default function Results() {
             <Link to="/library" className="ghost-btn">
               <LibraryBig size={16} /> Library
             </Link>
-            <Link to="/dashboard" className="ghost-btn">
-              <LayoutDashboard size={16} /> Dashboard
-            </Link>
           </div>
         </section>
 
@@ -216,9 +213,6 @@ export default function Results() {
           </button>
           <Link to="/library" className="ghost-btn">
             <LibraryBig size={16} /> Library
-          </Link>
-          <Link to="/dashboard" className="ghost-btn">
-            <LayoutDashboard size={16} /> Dashboard
           </Link>
         </div>
       </section>

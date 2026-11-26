@@ -1,0 +1,126 @@
+.continue-card {
+  display: block;
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1.25rem 1.5rem;
+  text-decoration: none;
+  transition: border-color var(--dur-fast, 200ms) var(--ease-out, ease), transform var(--dur-med, 280ms) var(--ease-spring, ease), box-shadow var(--dur-med, 280ms) ease;
+  animation: fadeUp 0.35s ease;
+}
+
+.continue-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-fast, 200ms) ease;
+  background: radial-gradient(
+    320px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent) 14%, transparent),
+    transparent 65%
+  );
+}
+
+.continue-card:hover::before {
+  opacity: 1;
+}
+
+.continue-card:hover {
+  border-color: var(--accent-border);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -12px rgba(20, 8, 16, 0.8), 0 8px 30px -14px rgba(255, 46, 136, 0.28);
+}
+
+.continue-hero {
+  padding: 1.5rem 1.75rem;
+  border-left-width: 3px;
+  box-shadow: 0 12px 32px -12px rgba(20, 8, 16, 0.8), 0 8px 30px -14px rgba(255, 46, 136, 0.28);
+}
+
+.continue-hero .continue-title {
+  font-size: 1.4rem;
+}
+
+.continue-hero .continue-pct {
+  font-size: 1.35rem;
+}
+
+.continue-hero .continue-btn {
+  background: var(--accent, #ff2e88);
+  color: #fff;
+  font-weight: 700;
+  padding: 0.55rem 1.25rem;
+  border-radius: 12px;
+  transition: filter 0.2s ease;
+}
+
+.continue-hero:hover .continue-btn {
+  filter: brightness(1.15);
+}
+
+.continue-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.topic-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  line-height: 1;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 7px;
+  border: 1px solid #262626;
+}
+
+.topic-badge svg {
+  flex-shrink: 0;
+}
+
+.continue-pct {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.continue-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #f5f5f5;
+  margin: 0 0 1rem;
+}
+
+.progress-bar-track {
+  height: 6px;
+  background: #262626;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+.continue-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #737373;
+}
+
+.continue-btn {
+  color: var(--accent, #ff2e88);
+  font-weight: 600;
+}

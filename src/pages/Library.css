@@ -24,6 +24,10 @@
   margin: 0;
 }
 
+.lib-continue {
+  margin-bottom: 1.5rem;
+}
+
 .lib-topics {
   display: flex;
   flex-direction: column;

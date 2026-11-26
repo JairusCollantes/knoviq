@@ -9,11 +9,8 @@ export default function NotFound() {
         for typos, or head back to somewhere familiar.
       </p>
       <div className="static-actions">
-        <Link to="/dashboard" className="btn-primary">
-          Back to Dashboard
-        </Link>
-        <Link to="/library" className="btn-ghost">
-          Browse Library
+        <Link to="/library" className="btn-primary">
+          Back to Library
         </Link>
       </div>
     </div>

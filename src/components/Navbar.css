@@ -25,6 +25,7 @@
   gap: 0.5rem;
   min-width: 0;               
   color: var(--accent, #ff2e88);
+  text-decoration: none;
 }
 
 .brand-icon {

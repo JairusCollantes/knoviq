@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Plus } from 'lucide-react';
-import { topics, lessons } from '../data/Data';
+import { topics, lessons, topicById } from '../data/Data';
+import ContinueCard from '../components/ContinueCard';
 import './Library.css';
 
 export default function Library() {
   const [search, setSearch] = useState('');
+  const nextLesson = lessons
+    .filter((l) => l.progress < l.total)
+    .sort((a, b) => b.progress / b.total - a.progress / a.total)[0];
+  const nextTopic = nextLesson ? topicById(nextLesson.topicId) : null;
 
   const filteredTopics = topics
     .map((t) => ({
@@ -20,8 +25,14 @@ export default function Library() {
     <div className="library">
       <header className="lib-header">
         <h1>My Lessons</h1>
-        <p className="lib-subtitle">Browse, search, and generate new lessons.</p>
+        <p className="lib-subtitle">Pick up where you left off, or start something new.</p>
       </header>
+
+      {nextLesson && (
+        <section className="lib-continue" aria-label="Continue learning">
+          <ContinueCard lesson={nextLesson} topic={nextTopic} />
+        </section>
+      )}
 
       <div className="search-wrap" role="search">
         <Search size={16} className="search-icon" aria-hidden="true" />
