@@ -63,13 +63,14 @@ create index if not exists attempts_user_idx on public.attempts (user_id, create
 
 create index if not exists attempts_lesson_idx on public.attempts (lesson_id);
 
--- Generation jobs
+-- Generation jobs (also enforces the one-generation-per-day quota)
 create table if not exists public.generation_jobs (
     id uuid primary key default gen_random_uuid (),
     user_id uuid not null references auth.users (id) on delete cascade,
     topic_input text not null default '',
     status text not null default 'ok' check (
         status in (
+            'pending',
             'ok',
             'mock',
             'error',
@@ -77,10 +78,33 @@ create table if not exists public.generation_jobs (
         )
     ),
     error text,
+    day date default ((now() at time zone 'utc')::date),
     created_at timestamptz not null default now()
 );
 
 create index if not exists generation_jobs_user_idx on public.generation_jobs (user_id, created_at desc);
+
+-- Existing databases: add the quota column and the 'pending' status
+alter table public.generation_jobs
+    add column if not exists day date default ((now() at time zone 'utc')::date);
+
+alter table public.generation_jobs
+    drop constraint if exists generation_jobs_status_check;
+
+alter table public.generation_jobs
+    add constraint generation_jobs_status_check check (
+        status in (
+            'pending',
+            'ok',
+            'mock',
+            'error',
+            'rate_limited'
+        )
+    );
+
+-- One generation per user per UTC day. `day` is nullable: setting it to null
+-- refunds the slot while keeping the failed job on record (NULLs don't collide).
+create unique index if not exists generation_jobs_user_day_uidx on public.generation_jobs (user_id, day);
 
 -- Row Level Security
 alter table public.profiles enable row level security;
@@ -116,6 +140,17 @@ with
         auth.role () = 'authenticated'
     );
 
+drop policy if exists "topics owner update" on public.topics;
+
+create policy "topics owner update" on public.topics for
+update using (auth.uid () = owner_id)
+with
+    check (auth.uid () = owner_id);
+
+drop policy if exists "topics owner delete" on public.topics;
+
+create policy "topics owner delete" on public.topics for delete using (auth.uid () = owner_id);
+
 drop policy if exists "lessons read" on public.lessons;
 
 create policy "lessons read" on public.lessons for
@@ -133,10 +168,9 @@ with
         auth.role () = 'authenticated'
     );
 
+-- Questions are only served through the API (service role) so answer fields
+-- never reach the browser. No client-facing select policy.
 drop policy if exists "questions read" on public.questions;
-
-create policy "questions read" on public.questions for
-select using (true);
 
 drop policy if exists "questions write auth" on public.questions;
 
@@ -159,3 +193,18 @@ drop policy if exists "jobs owner" on public.generation_jobs;
 create policy "jobs owner" on public.generation_jobs for all using (auth.uid () = user_id)
 with
     check (auth.uid () = user_id);
+
+-- Create a profile row automatically when a user signs up
+create or replace function public.handle_new_user() returns trigger
+language plpgsql security definer
+set search_path = public as $$
+begin
+    insert into public.profiles (id) values (new.id) on conflict do nothing;
+    return new;
+end;
+$$;
+
+drop trigger if exists on_auth_user_created on auth.users;
+
+create trigger on_auth_user_created
+    after insert on auth.users for each row execute function public.handle_new_user();
