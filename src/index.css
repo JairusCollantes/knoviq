@@ -270,8 +270,8 @@ button:disabled {
 }
 
 .static-actions .btn-primary {
-  background: var(--accent);
-  color: #fff;
+  background: var(--accent-light);
+  color: #0c0a0e;
 }
 
 .static-actions .btn-primary:hover {
