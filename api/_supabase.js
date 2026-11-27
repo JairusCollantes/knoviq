@@ -31,3 +31,19 @@ export function requireMethod(req, res, methods) {
 export function ok(res, data) {
   return res.status(200).json({ data });
 }
+
+export function fail(res, status, message) {
+  return res.status(status).json({ error: message });
+}
+
+export function parseBody(req) {
+  if (!req.body) return {};
+  if (typeof req.body === 'string') {
+    try {
+      return JSON.parse(req.body);
+    } catch {
+      return {};
+    }
+  }
+  return req.body;
+}

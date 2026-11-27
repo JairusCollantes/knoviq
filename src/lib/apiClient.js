@@ -27,7 +27,6 @@ export const api = {
   generateLesson: (payload) => req('/api/lessons/generate', { method: 'POST', body: JSON.stringify(payload) }),
   submitAttempt: (payload) => req('/api/attempts', { method: 'POST', body: JSON.stringify(payload) }),
   attempt: (id) => req(`/api/attempts/${id}`),
-  dashboard: () => req('/api/dashboard'),
   profile: () => req('/api/profile'),
   updateProfile: (payload) => req('/api/profile', { method: 'PATCH', body: JSON.stringify(payload) }),
 };
